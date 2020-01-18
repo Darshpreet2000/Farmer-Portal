@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "3309989986-r4b244virsgka54bpq75iqcmi4peetp2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.farmer_portal",
+            "certificate_hash": "de1eddce7872c4f2530e8769593a33d99d239f71"
+          }
+        },
+        {
           "client_id": "3309989986-o02ndk4t5ak48vopuho51fph9ck97dss.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
