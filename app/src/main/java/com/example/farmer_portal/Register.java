@@ -27,6 +27,7 @@ import java.util.Objects;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
+
     DatabaseReference myRef;
     ProgressBar progressBar;
     FirebaseDatabase database;
@@ -111,7 +112,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
-                    User user =new User(name,email,phonenumber,area);
+                    boolean  phonenumbervarified=false;
+                    User user =new User(name,email,phonenumber,area,phonenumbervarified);
                     myRef.child(Objects.requireNonNull(mAuth.getUid())).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
