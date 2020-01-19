@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/Home">
+
+    <fragment
+        android:id="@+id/AddProduct"
+        android:name="com.example.farmer_portal.ui.add_product"
+        android:label="fragment_add_product"
+        tools:layout="@layout/fragment_add_product" />
+    <fragment
+        android:id="@+id/Payment"
+        android:name="com.example.farmer_portal.ui.payments"
+        android:label="fragment_payments"
+        tools:layout="@layout/fragment_payments" />
+    <fragment
+        android:id="@+id/Transport"
+        android:name="com.example.farmer_portal.ui.transport"
+        android:label="fragment_transport"
+        tools:layout="@layout/fragment_transport" />
+    <fragment
+        android:id="@+id/Home"
+        android:name="com.example.farmer_portal.ui.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/my_Products"
+        android:name="com.example.farmer_portal.ui.My_Products"
+        android:label="fragment_my__products"
+        tools:layout="@layout/fragment_my__products" />
+
+</navigation>

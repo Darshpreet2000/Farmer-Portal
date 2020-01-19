@@ -113,7 +113,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                             if(task.isSuccessful()){
                                 Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                                 finish();
-                                startActivity(new Intent(Register.this,MainActivity.class));
+                                startActivity(new Intent(Register.this,NavigationDrawer.class));
                                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                             }
                             else{

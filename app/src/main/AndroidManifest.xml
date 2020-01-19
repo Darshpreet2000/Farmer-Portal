@@ -9,10 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login"></activity>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".NavigationDrawer"
+            android:label="@string/title_activity_navigation_drawer"
+            android:theme="@style/FormTheme"></activity>
+        <activity android:name=".Register"
             android:theme="@style/FormTheme"/>
-        <activity android:name=".Register">
+        <activity android:name=".Login"
+            android:theme="@style/FormTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -70,13 +70,14 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
                     finish();
-                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    Intent intent = new Intent(Login.this, NavigationDrawer.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    progressBar.setVisibility(View.GONE);
                     startActivity(intent);
                 } else {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -89,7 +90,7 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
 
         if (mAuth.getCurrentUser() != null) {
             finish();
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, NavigationDrawer.class));
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         }
     }
