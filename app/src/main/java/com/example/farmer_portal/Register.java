@@ -36,6 +36,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth=FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(Register.this, PhoneNumberVarification.class));
+            finish();
+        }
         setContentView(R.layout.activity_register);
 
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
@@ -47,7 +52,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         editTextArea = (EditText) findViewById(R.id.Area);
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("User_details");
 
@@ -113,7 +118,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                             if(task.isSuccessful()){
                                 Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                                 finish();
-                                startActivity(new Intent(Register.this,MainActivity.class));
+                                startActivity(new Intent(Register.this,PhoneNumberVarification.class));
                                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
                             }
                             else{
