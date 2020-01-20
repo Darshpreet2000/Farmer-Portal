@@ -98,38 +98,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
-
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.GONE);
-                if (task.isSuccessful()) {
-                    User user =new User(name,email,phonenumber,area);
-                    myRef.child(Objects.requireNonNull(mAuth.getUid())).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(Register.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(Register.this,NavigationDrawer.class));
-                                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                            }
-                            else{
-                                Toast.makeText(Register.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-                } else {
-
-                    task.getException();
-                    Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
+        Intent intent=new Intent(Register.this,PhoneNumberVerify.class);
+        User user =new User(name,email,phonenumber,area);
+        intent.putExtra("User", user);
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        finish();
+        startActivity(intent);
     }
 
     @Override
