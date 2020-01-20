@@ -2,7 +2,10 @@ package com.example.farmer_portal.Classes;
 
 import android.net.wifi.aware.PublishConfig;
 
-public class Addproduct {
+import java.io.Serializable;
+
+public class Addproduct implements Serializable {
+
     public String name,quantity,category;
 
     public Addproduct() {
