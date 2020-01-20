@@ -1,10 +1,12 @@
 package com.example.farmer_portal;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +43,7 @@ public class PhoneNumberVarification extends AppCompatActivity  {
 
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference mGetReference = mDatabase.getReference();
+
 
 
 
@@ -67,9 +71,32 @@ public class PhoneNumberVarification extends AppCompatActivity  {
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser user=mAuth.getCurrentUser();
-        String userID=user.getUid();
+        final String userID=user.getUid();
         mGetReference=FirebaseDatabase.getInstance().getReference().child(userID);
 
+   mGetReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                Log.d("mgs", "Value is: " + value);
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user =snapshot.getValue(User.class);
+
+
+                }
+
+                //Toast.makeText(PhoneNumberVarification.this,mGetReference.child("Phone").toString(), Toast.LENGTH_LONG).show();
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+               // Toast.makeText(PhoneNumberVarification.this, "error", Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
        /* if (mAuth.getCurrentUser() != null) {
