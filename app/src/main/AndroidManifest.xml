@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PhoneNumberVerify"></activity>
+        <activity android:name=".NewActivity"></activity>
+        <activity
+            android:name=".Login"
+            android:theme="@style/FormTheme" />
+        <activity android:name=".PhoneNumberVerify" />
         <activity
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
@@ -18,7 +22,7 @@
             android:name=".Register"
             android:theme="@style/FormTheme" />
         <activity
-            android:name=".Login"
+            android:name=".WelcomeSplash"
             android:theme="@style/FormTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
