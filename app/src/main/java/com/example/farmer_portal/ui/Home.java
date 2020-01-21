@@ -77,6 +77,18 @@ public class Home extends Fragment {
                         productList.add(restaurantModel);
                     }
                 }
+                //Following data is inserted for checking purpose
+
+                Addproduct restaurantModel=new Addproduct();
+                restaurantModel.setQuantity("2");
+                restaurantModel.setCategory("g");
+                restaurantModel.setName("name");
+                productList.add(restaurantModel);
+                Addproduct restaurantModel1=new Addproduct();
+                restaurantModel1.setQuantity("21");
+                restaurantModel1.setCategory("g1");
+                restaurantModel1.setName("name1");
+                productList.add(restaurantModel1);
                 product_adapter Product_adapter=new product_adapter(productList);
 
                 recyclerView.setAdapter(Product_adapter);
