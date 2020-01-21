@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.farmer_portal.ui.Home;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -50,6 +51,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("User_details");
+        if(mAuth.getCurrentUser()!=null){
+            Intent intent=new Intent(getApplicationContext(), NavigationDrawer.class);
+            startActivity(intent);
+        }
 
         findViewById(R.id.buttonSignUp).setOnClickListener(this);
         findViewById(R.id.textViewLogin).setOnClickListener(this);

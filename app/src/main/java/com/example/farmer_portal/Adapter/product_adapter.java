@@ -1,5 +1,8 @@
 package com.example.farmer_portal.Adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +12,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.farmer_portal.Classes.Addproduct;
+import com.example.farmer_portal.NewActivity;
 import com.example.farmer_portal.R;
+import com.example.farmer_portal.ui.Home;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class product_adapter extends RecyclerView.Adapter<product_adapter.Productholder> {
     public product_adapter(List<Addproduct> product) {
@@ -20,6 +28,12 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
     }
 
     private List<Addproduct> product=new ArrayList<>();
+    private OnItemClicked onClick;
+
+    //make interface like this
+    public interface OnItemClicked {
+        void onItemClick(int position);
+    }
 
     @NonNull
     @Override
@@ -31,10 +45,23 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull Productholder holder, int position) {
-        Addproduct currentnote=product.get(position);
+        final Addproduct currentnote=product.get(position);
         holder.title.setText(currentnote.getName());
         holder.category.setText(currentnote.getCategory());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                Intent intent = new Intent(context, NewActivity.class);
+
+                intent.putExtra("class", (Serializable) currentnote);
+
+
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
