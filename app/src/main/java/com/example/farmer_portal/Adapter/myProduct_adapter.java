@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.farmer_portal.Classes.Addproduct;
 import com.example.farmer_portal.MyProductActivity;
-import com.example.farmer_portal.NewActivity;
 import com.example.farmer_portal.R;
 
 import java.io.Serializable;
@@ -48,8 +47,9 @@ public class myProduct_adapter extends RecyclerView.Adapter<myProduct_adapter.my
             @Override
             public void onClick(View v) {
                 Context context = getApplicationContext();
-                Intent intent = new Intent(context, MyProductActivity.class);
 
+                Intent intent = new Intent(context, MyProductActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("class", (Serializable) currentnote);
 
 
