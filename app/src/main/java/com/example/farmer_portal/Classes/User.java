@@ -2,17 +2,18 @@ package com.example.farmer_portal.Classes;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
-    public String name,email,phone,area_Location;
+public class User implements Serializable    {
+    private String name,email,phone,area_Location,RegisterAs;
     public User(){
 
     }
 
-    public User(String name, String email, String phone, String area_Location) {
+    public User(String name, String email, String phone, String area_Location,String RegisterAs) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.area_Location = area_Location;
+        this.RegisterAs=RegisterAs;
     }
 
     public String getName() {
@@ -45,5 +46,13 @@ public class User implements Serializable {
 
     public void setArea_Location(String area_Location) {
         this.area_Location = area_Location;
+    }
+
+    public String getRegisterAs() {
+        return RegisterAs;
+    }
+
+    public void setRegisterAs(String registerAs) {
+        RegisterAs = registerAs;
     }
 }
