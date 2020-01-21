@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-public class NewActivity extends AppCompatActivity {
+public class displayproduct extends AppCompatActivity {
     TextView textView;
 
     Button buyNow;
@@ -39,20 +39,19 @@ public class NewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new);
+        setContentView(R.layout.activity_displayproduct);
 
         textView=findViewById(R.id.productDescreption);
         buyNow=findViewById(R.id.BuyNow);
         buyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(NewActivity.this,BuyNow.class);
+                Intent intent=new Intent(displayproduct.this,BuyNow.class);
                 ///put something to pass by intent
                 startActivity(intent);
             }
         });
 
-        textView=findViewById(R.id.textView2);
        enterbiddingprice=findViewById(R.id.biddingprice);
        addbdidding=findViewById(R.id.addbidding);
         mAuth = FirebaseAuth.getInstance();
@@ -80,10 +79,10 @@ public class NewActivity extends AppCompatActivity {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){
-                           Toast.makeText(NewActivity.this, "Added Successful", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(displayproduct.this, "Added Successful", Toast.LENGTH_SHORT).show();
                        }
                        else{
-                           Toast.makeText(NewActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(displayproduct.this, "Failed", Toast.LENGTH_SHORT).show();
                        }
                    }
                });
