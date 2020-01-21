@@ -9,9 +9,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.farmer_portal.ui.Home;
@@ -24,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.farmer_portal.Classes.User;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
@@ -33,6 +37,31 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     FirebaseDatabase database;
     EditText editTextEmail, editTextPassword,editTextName,editTextPhoneNumber,editTextIndustry,editTextArea;
     private FirebaseAuth mAuth;
+    Spinner RegisterAs;
+
+    private void setupspinner(){
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Register As");
+        arrayList.add("I Am Farmer");
+        arrayList.add("I Am Buyer");
+        arrayList.add("I Am Driver");
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item, arrayList){
+            @Override
+            public boolean isEnabled(int position) {
+                if(position ==0){
+                    return false;
+                }
+                return true;
+            }
+        };
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        RegisterAs.setAdapter(arrayAdapter);
+        RegisterAs.setPrompt("Choose Category");
+        RegisterAs.setSelection(0, false);
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +76,26 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         editTextPhoneNumber = (EditText) findViewById(R.id.Phonenumber);
 
         editTextArea = (EditText) findViewById(R.id.Area);
+        RegisterAs=findViewById(R.id.RegisterAs);
+
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("User_details");
+
+        setupspinner();
+        RegisterAs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String tutorialsName = parent.getItemAtPosition(position).toString();
+                Toast.makeText(parent.getContext(), "Selected: " + tutorialsName,Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+            }
+        });
+
+
         if(mAuth.getCurrentUser()!=null){
             Intent intent=new Intent(getApplicationContext(), NavigationDrawer.class);
             startActivity(intent);
@@ -67,8 +112,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         String password = editTextPassword.getText().toString().trim();
         final String name = editTextName.getText().toString().trim();
         final String phonenumber = editTextPhoneNumber.getText().toString().trim();
+        String RegisteredAs=RegisterAs.getSelectedItem().toString();
 
         final String area = editTextArea.getText().toString().trim();
+        if(RegisteredAs=="Register As"){
+            Toast.makeText(this, "Please Select Register As", Toast.LENGTH_SHORT).show();
+
+        }
 
       if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
@@ -104,13 +154,17 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             return;
         }
 
-        Intent intent=new Intent(Register.this,PhoneNumberVerify.class);
-        User user =new User(name,email,phonenumber,area);
-        intent.putExtra("User", user);
-        intent.putExtra("sender","register");
-        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-        finish();
-        startActivity(intent);
+        if(RegisteredAs!="Register As")
+        {
+            Intent intent=new Intent(Register.this,PhoneNumberVerify.class);
+            User user =new User(name,email,phonenumber,area,RegisteredAs);///
+            intent.putExtra("User", user);
+            intent.putExtra("sender","register");
+            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+           // finish();
+            startActivity(intent);
+        }
+
     }
 
     @Override
