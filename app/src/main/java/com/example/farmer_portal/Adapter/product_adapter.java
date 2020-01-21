@@ -2,7 +2,6 @@ package com.example.farmer_portal.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.farmer_portal.Classes.Addproduct;
 import com.example.farmer_portal.NewActivity;
 import com.example.farmer_portal.R;
-import com.example.farmer_portal.ui.Home;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -56,7 +54,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
             public void onClick(View v) {
                 Context context = getApplicationContext();
                 Intent intent = new Intent(context, NewActivity.class);
-
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("class", (Serializable) currentnote);
 
 
