@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
-public class displayproduct extends AppCompatActivity {
+public class NewActivity extends AppCompatActivity {
     TextView textView;
    EditText enterbiddingprice;
    Button addbdidding;
@@ -32,7 +32,7 @@ public class displayproduct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_productdetails);
+        setContentView(R.layout.activity_new);
         textView=findViewById(R.id.textView2);
        enterbiddingprice=findViewById(R.id.biddingprice);
        addbdidding=findViewById(R.id.addbidding);
@@ -59,10 +59,10 @@ public class displayproduct extends AppCompatActivity {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){
-                           Toast.makeText(displayproduct.this, "Added Successful", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(NewActivity.this, "Added Successful", Toast.LENGTH_SHORT).show();
                        }
                        else{
-                           Toast.makeText(displayproduct.this, "Failed", Toast.LENGTH_SHORT).show();
+                           Toast.makeText(NewActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                        }
                    }
                });
