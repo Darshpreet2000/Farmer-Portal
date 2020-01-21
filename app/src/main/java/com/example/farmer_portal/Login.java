@@ -46,8 +46,9 @@ public class Login extends AppCompatActivity  implements View.OnClickListener{
      Intent intent=new Intent(Login.this,PhoneNumberVerify.class);
         intent.putExtra("phone",phonenumber);
         intent.putExtra("sender","login");
-        finish();
+
         startActivity(intent);
+        finish();
     }
 
     @Override
