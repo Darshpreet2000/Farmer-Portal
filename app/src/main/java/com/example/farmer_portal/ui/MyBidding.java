@@ -52,9 +52,10 @@ public class MyBidding extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Products").child(Objects.requireNonNull(mAuth.getUid()));
+        myRef = database.getReference("Bidding").child(Objects.requireNonNull(mAuth.getUid()));
         progressBarrecyclemybidding=(ProgressBar) view.findViewById(R.id.progressBarmybidding);
         progressBarrecyclemybidding.setVisibility(View.VISIBLE);
         recyclerViewmybidding=view.findViewById(R.id.recycleviewmybidding);
     }
+
 }

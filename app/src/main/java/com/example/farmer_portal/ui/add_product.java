@@ -132,16 +132,15 @@ public class add_product extends Fragment {
 
              int PriceOfCrop=0+ Integer.parseInt(s);
 
-
-
-
-                 Addproduct addproduct=new Addproduct(productname,productquantity,spinneritem,PriceOfCrop);
-                 myRef.child(Objects.requireNonNull(mAuth.getUid())).push().setValue(addproduct).addOnCompleteListener(new OnCompleteListener<Void>() {
+             String farmerid=mAuth.getUid();
+                 Addproduct addproduct=new Addproduct(productname,productquantity,spinneritem,farmerid,PriceOfCrop);
+            myRef.child(Objects.requireNonNull(mAuth.getUid())).push().setValue(addproduct).addOnCompleteListener(new OnCompleteListener<Void>() {
                      @Override
                      public void onComplete(@NonNull Task<Void> task) {
                          progressBaraddproduct.setVisibility(View.GONE);
                          if(task.isSuccessful()){
                              Toast.makeText(getContext(), "Added Successful", Toast.LENGTH_SHORT).show();
+
                          }
                          else{
                              Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
