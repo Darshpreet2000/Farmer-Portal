@@ -101,6 +101,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         Intent intent=new Intent(Register.this,PhoneNumberVerify.class);
         User user =new User(name,email,phonenumber,area);
         intent.putExtra("User", user);
+        intent.putExtra("sender","register");
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
         finish();
         startActivity(intent);
