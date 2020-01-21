@@ -66,15 +66,11 @@ public class My_Products extends Fragment {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 myproductList.clear();
-               /* for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
+                for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
                     Addproduct restaurantModel = dataValues.getValue(Addproduct.class);
                     myproductList.add(restaurantModel);
-                }*/
-                Addproduct restaurantModel=null;
-                restaurantModel.setQuantity("2");
-                restaurantModel.setCategory("g");
-                restaurantModel.setName("name");
-                myproductList.add(restaurantModel);
+                }
+
                 recyclerViewmy.setLayoutManager(new LinearLayoutManager(getContext()));
                 myProduct_adapter Product_adapter=new myProduct_adapter( myproductList);
                 recyclerViewmy.setAdapter(Product_adapter);

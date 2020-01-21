@@ -54,6 +54,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         if(mAuth.getCurrentUser()!=null){
             Intent intent=new Intent(getApplicationContext(), NavigationDrawer.class);
             startActivity(intent);
+            finish();
         }
 
         findViewById(R.id.buttonSignUp).setOnClickListener(this);

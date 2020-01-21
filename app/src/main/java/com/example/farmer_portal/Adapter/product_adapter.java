@@ -47,6 +47,8 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         holder.title.setText(currentnote.getName());
         holder.category.setText(currentnote.getCategory());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
+        holder.CropPrice.setText(String.valueOf(currentnote.getCropPrice()));
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,12 +73,14 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         private TextView title;
         private TextView category;
         private TextView quantity;
+        private  TextView CropPrice;
 
         public Productholder(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.producttitle);
             category=itemView.findViewById(R.id.productcategory);
             quantity=itemView.findViewById(R.id.productquantity);
+            CropPrice=itemView.findViewById(R.id.PriceOfCrop1);
         }
     }
 
