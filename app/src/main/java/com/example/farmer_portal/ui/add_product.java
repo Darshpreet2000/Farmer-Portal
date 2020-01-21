@@ -49,7 +49,7 @@ public class add_product extends Fragment {
     FloatingActionButton floatingActionButton;
     ProgressBar progressBaraddproduct;
     Spinner spinner;
-    EditText name,quantity;
+    EditText name,quantity,CropPrice;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,6 +62,9 @@ public class add_product extends Fragment {
         name = (EditText) view.findViewById(R.id.productname);
         progressBaraddproduct = (ProgressBar) view.findViewById(R.id.progressBaraddproduct);
         quantity = (EditText) view.findViewById(R.id.quantity);
+        CropPrice=view.findViewById(R.id.PriceOfCrop);
+
+
         setupspinner();
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -112,18 +115,45 @@ public class add_product extends Fragment {
          String productname=name.getText().toString();
          String productquantity=quantity.getText().toString();
          String spinneritem=spinner.getSelectedItem().toString();
-         Addproduct addproduct=new Addproduct(productname,productquantity,spinneritem);
-        myRef.child(Objects.requireNonNull(mAuth.getUid())).push().setValue(addproduct).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                progressBaraddproduct.setVisibility(View.GONE);
-                if(task.isSuccessful()){
-                    Toast.makeText(getContext(), "Added Successful", Toast.LENGTH_SHORT).show();
-                          }
-                else{
-                    Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+         String s=CropPrice.getText().toString();
+         if(s.isEmpty()){
+             CropPrice.setError("thisField is required");
+             CropPrice.requestFocus();
+             if(productname.isEmpty()){
+                 name.setError("this field is required");
+                 name.requestFocus();
+             }
+             if(productquantity.isEmpty()){
+                 quantity.setError("this field is required");
+                 quantity.requestFocus();
+             }
+         }
+         else{
+
+             int PriceOfCrop=0+ Integer.parseInt(s);
+
+
+
+
+                 Addproduct addproduct=new Addproduct(productname,productquantity,spinneritem,PriceOfCrop);
+                 myRef.child(Objects.requireNonNull(mAuth.getUid())).push().setValue(addproduct).addOnCompleteListener(new OnCompleteListener<Void>() {
+                     @Override
+                     public void onComplete(@NonNull Task<Void> task) {
+                         progressBaraddproduct.setVisibility(View.GONE);
+                         if(task.isSuccessful()){
+                             Toast.makeText(getContext(), "Added Successful", Toast.LENGTH_SHORT).show();
+                         }
+                         else{
+                             Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                         }
+                     }
+                 });
+
+
+
+
+         }
+
+
     }
 }

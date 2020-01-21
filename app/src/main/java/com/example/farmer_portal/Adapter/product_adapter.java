@@ -2,7 +2,6 @@ package com.example.farmer_portal.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.farmer_portal.Classes.Addproduct;
 import com.example.farmer_portal.NewActivity;
 import com.example.farmer_portal.R;
-import com.example.farmer_portal.ui.Home;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -49,12 +47,14 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         holder.title.setText(currentnote.getName());
         holder.category.setText(currentnote.getCategory());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
+        holder.CropPrice.setText(String.valueOf(currentnote.getCropPrice()));
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = getApplicationContext();
                 Intent intent = new Intent(context, NewActivity.class);
-
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("class", (Serializable) currentnote);
 
 
@@ -73,12 +73,14 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         private TextView title;
         private TextView category;
         private TextView quantity;
+        private  TextView CropPrice;
 
         public Productholder(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.producttitle);
             category=itemView.findViewById(R.id.productcategory);
             quantity=itemView.findViewById(R.id.productquantity);
+            CropPrice=itemView.findViewById(R.id.PriceOfCrop1);
         }
     }
 
