@@ -3,6 +3,17 @@ package com.example.farmer_portal.Classes;
 public class bidding {
    public String farmerid,price,name,quantity;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public bidding() {
+    }
+
     public bidding(String farmerid, String price, String name, String quantity) {
         this.farmerid = farmerid;
         this.price = price;

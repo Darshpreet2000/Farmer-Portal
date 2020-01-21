@@ -117,7 +117,7 @@ public class add_product extends Fragment {
          String spinneritem=spinner.getSelectedItem().toString();
          String s=CropPrice.getText().toString();
          if(s.isEmpty()){
-             CropPrice.setError("thisField is required");
+             CropPrice.setError("this Field is required");
              CropPrice.requestFocus();
              if(productname.isEmpty()){
                  name.setError("this field is required");

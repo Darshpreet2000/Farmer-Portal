@@ -36,6 +36,7 @@ public class displayproduct extends AppCompatActivity {
    EditText enterbiddingprice;
    Button addbdidding;
     DatabaseReference myRef;
+    DatabaseReference myBid;
     ProgressBar progressBar;
     private FirebaseAuth mAuth;
     FirebaseDatabase database;
@@ -60,8 +61,8 @@ String farmerid,price,name,quantity;
        addbdidding=findViewById(R.id.addbidding);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Bidding");
-
+        myRef = database.getReference("FarmerBidding");
+        myBid = database.getReference("MyBidding");
         Intent intent=getIntent();
        final Addproduct addproduct=(Addproduct) intent.getSerializableExtra("class");
         //Log.d("msg",addproduct.getName());
@@ -70,7 +71,7 @@ String farmerid,price,name,quantity;
         s+="quantity:"+addproduct.getQuantity()+"\n";
         s+="price:"+addproduct.getCropPrice();
         farmerid=addproduct.getFarmerid();
-        name=addproduct.getName();
+        name=addproduct.getCropid();
         quantity=addproduct.getQuantity();
         textView.setText(s);
        addbdidding.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,18 @@ String farmerid,price,name,quantity;
                price=enterbiddingprice.getText().toString();
                bidding Bidding=new bidding(farmerid,price,name,quantity);
              //Need to change here so that price gets updated only in that crop
-               myRef.child(farmerid).child(Objects.requireNonNull(mAuth.getUid())).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+               myRef.child(farmerid).child(name).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+                   @Override
+                   public void onComplete(@NonNull Task<Void> task) {
+                       if(task.isSuccessful()){
+                           Toast.makeText(displayproduct.this, "Added Successful", Toast.LENGTH_SHORT).show();
+                       }
+                       else{
+                           Toast.makeText(displayproduct.this, "Failed", Toast.LENGTH_SHORT).show();
+                       }
+                   }
+               });
+               myBid.child(Objects.requireNonNull(mAuth.getUid())).child(name).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){

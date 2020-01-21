@@ -48,6 +48,7 @@ public class PhoneNumberVerify extends AppCompatActivity {
         String sender=getIntent().getExtras().getString("sender");
         if (sender.equals("register")) {
             user= (User) getIntent().getSerializableExtra("User");
+
             no = user.getPhone();
         }
         else{

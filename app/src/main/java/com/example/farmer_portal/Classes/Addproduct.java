@@ -6,11 +6,26 @@ import java.io.Serializable;
 
 public class Addproduct implements Serializable {
 
-    private String name,quantity,category,farmerid;
+    private String name,quantity,category,farmerid,cropid,bid;
     private   int CropPrice;
-
     public Addproduct() {
 
+    }
+
+    public String getBid() {
+        return bid;
+    }
+
+    public void setBid(String bid) {
+        this.bid = bid;
+    }
+
+    public String getCropid() {
+        return cropid;
+    }
+
+    public void setCropid(String cropid) {
+        this.cropid = cropid;
     }
 
     public String getFarmerid() {
