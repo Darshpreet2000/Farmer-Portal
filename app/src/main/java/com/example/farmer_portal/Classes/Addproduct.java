@@ -6,18 +6,68 @@ import java.io.Serializable;
 
 public class Addproduct implements Serializable {
 
-    private String name,quantity,category;
-    private   int CropPrice;
+    private String name,quantity,category,farmerid,cropid,bid,farmername,farmerphone,userid;
+    private  int CropPrice;
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getFarmername() {
+        return farmername;
+    }
+
+    public void setFarmername(String farmername) {
+        this.farmername = farmername;
+    }
+
+    public String getFarmerphone() {
+        return farmerphone;
+    }
+
+    public void setFarmerphone(String farmerphone) {
+        this.farmerphone = farmerphone;
+    }
 
     public Addproduct() {
 
     }
 
-    public Addproduct(String name, String quantity, String category,int CropPrice) {
+    public String getBid() {
+        return bid;
+    }
+
+    public void setBid(String bid) {
+        this.bid = bid;
+    }
+
+    public String getCropid() {
+        return cropid;
+    }
+
+    public void setCropid(String cropid) {
+        this.cropid = cropid;
+    }
+
+    public String getFarmerid() {
+        return farmerid;
+    }
+
+    public void setFarmerid(String farmerid) {
+        this.farmerid = farmerid;
+    }
+
+
+    public Addproduct(String name, String quantity, String category, String farmerid,  int cropPrice) {
         this.name = name;
         this.quantity = quantity;
         this.category = category;
-        this.CropPrice=CropPrice;
+        this.farmerid = farmerid;
+        CropPrice = cropPrice;
     }
 
     public String getName() {

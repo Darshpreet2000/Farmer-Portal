@@ -4,45 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".displayproduct">
 
-    android:background="#C97470"
-
-    tools:context=".NewActivity">
 
     <TextView
         android:id="@+id/productDescreption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="140dp"
-        android:text="This is new Activity"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp"
-
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="28dp"
         android:text="ThisisnewActivity"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/BuyNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/_light_green"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="264dp"
+        android:layout_marginTop="343dp"
         android:text="BuyNow /ख़रीदे"
-        android:textColor="@color/antique_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/productDescreption"
         app:layout_constraintVertical_bias="0.239" />
-</androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
         android:layout_width="wrap_content"
@@ -61,5 +52,5 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="212dp"
-        android:text="ADD" />
+        android:text="Bid Price" />
 </RelativeLayout>
