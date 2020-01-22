@@ -15,4 +15,7 @@
     <item
         android:id="@+id/bidding"
         android:title="My Bidding" />
+    <item
+        android:id="@+id/bidmycrop"
+        android:title="Bids To My Crops" />
 </menu>

@@ -44,9 +44,11 @@ public class PhoneNumberVerify extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number_verify);
+
         String sender=getIntent().getExtras().getString("sender");
-        if (sender=="register") {
+        if (sender.equals("register")) {
             user= (User) getIntent().getSerializableExtra("User");
+
             no = user.getPhone();
         }
         else{
@@ -108,7 +110,8 @@ public class PhoneNumberVerify extends AppCompatActivity {
         @Override
         public void onVerificationFailed(FirebaseException e) {
             Toast.makeText(PhoneNumberVerify.this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
+           e.printStackTrace();
+         }
 
         @Override
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {

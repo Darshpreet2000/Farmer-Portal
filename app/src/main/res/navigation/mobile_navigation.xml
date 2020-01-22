@@ -35,5 +35,10 @@
         android:name="com.example.farmer_portal.ui.MyBidding"
         android:label="fragment_my_bidding"
         tools:layout="@layout/fragment_my_bidding" />
+    <fragment
+        android:id="@+id/bidmycrop"
+        android:name="com.example.farmer_portal.ui.Bids_to_my_crops"
+        android:label="fragment_bids_to_my_crops"
+        tools:layout="@layout/fragment_bids_to_my_crops" />
 
 </navigation>
