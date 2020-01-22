@@ -1,7 +1,15 @@
 package com.example.farmer_portal.Classes;
 
 public class bidding {
-   public String farmerid,price,name,quantity;
+   public String farmerid,price,name,quantity,buyerid;
+
+    public String getBuyerid() {
+        return buyerid;
+    }
+
+    public void setBuyerid(String buyerid) {
+        this.buyerid = buyerid;
+    }
 
     public String getName() {
         return name;
@@ -14,11 +22,12 @@ public class bidding {
     public bidding() {
     }
 
-    public bidding(String farmerid, String price, String name, String quantity) {
+    public bidding(String farmerid, String price, String name, String quantity,String buyerid) {
         this.farmerid = farmerid;
         this.price = price;
         this.name = name;
         this.quantity = quantity;
+        this.buyerid=buyerid;
     }
 
     public String getFarmerid() {

@@ -16,13 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-
+import com.example.farmer_portal.Classes.User;
 import com.example.farmer_portal.Adapter.myBidding;
 import com.example.farmer_portal.Adapter.product_adapter;
 import com.example.farmer_portal.Classes.Addproduct;
+import com.example.farmer_portal.Classes.User;
 import com.example.farmer_portal.Classes.bidding;
 import com.example.farmer_portal.R;
-import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,9 +45,7 @@ private List<Addproduct> biddingList=new ArrayList<>();
     public MyBidding() {
         // Required empty public constructor
     }
-
-    private List<Addproduct> mybiddingList = new ArrayList<>();
-    DatabaseReference myRef,productref;
+    DatabaseReference myRef,productref,user;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
 
@@ -75,12 +73,13 @@ private List<Addproduct> biddingList=new ArrayList<>();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                biddingList.clear();
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
            //     biddingList.clear();
                 for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
                         Log.v("", dataValues.toString());
-                        bidding restaurantModel = dataValues.getValue(bidding.class);
+                        final bidding restaurantModel = dataValues.getValue(bidding.class);
                    final String bid=restaurantModel.getPrice();
                     productref = database.getReference("Products/"+restaurantModel.getFarmerid());
                     productref.equalTo(restaurantModel.name);
@@ -89,14 +88,31 @@ private List<Addproduct> biddingList=new ArrayList<>();
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
                                     Log.v("", dataValues.toString());
-                                    Addproduct addproduct=dataValues.getValue(Addproduct.class);
+                                    final Addproduct addproduct=dataValues.getValue(Addproduct.class);
                                     addproduct.setBid(bid);
-                                    biddingList.add(addproduct);
+                                  user=database.getReference("User_details/"+restaurantModel.getFarmerid());
+                                  user.addValueEventListener(new ValueEventListener() {
+                                      @Override
+                                      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            User user=dataSnapshot.getValue(User.class);
+                                            Log.v("Bidding My",""+user.getPhone());
+                                              addproduct.setFarmerphone(user.getPhone());
+                                              addproduct.setFarmername(user.getName());
+                                          biddingList.add(addproduct);
+                                          myBidding Product_adapter=new myBidding(biddingList);
+                                          recyclerViewmybidding.setAdapter(Product_adapter);
+                                          recyclerViewmybidding.setHasFixedSize(true);
+                                          progressBarrecyclemybidding.setVisibility(View.GONE);
+                                      }
+
+                                      @Override
+                                      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                      }
+                                  });
+                                    //add farmer  name and mobile from its id and cropid
+
                                 }
-                                myBidding Product_adapter=new myBidding(biddingList);
-                                recyclerViewmybidding.setAdapter(Product_adapter);
-                                recyclerViewmybidding.setHasFixedSize(true);
-                                progressBarrecyclemybidding.setVisibility(View.GONE);
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {

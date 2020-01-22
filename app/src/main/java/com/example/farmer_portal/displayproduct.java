@@ -84,7 +84,7 @@ String farmerid,price,name,quantity;
                    return;
                }
                price=enterbiddingprice.getText().toString();
-               bidding Bidding=new bidding(farmerid,price,name,quantity);
+               bidding Bidding=new bidding(farmerid,price,name,quantity,mAuth.getUid());
              //Need to change here so that price gets updated only in that crop
                myRef.child(farmerid).child(name).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override

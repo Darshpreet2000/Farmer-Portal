@@ -6,8 +6,33 @@ import java.io.Serializable;
 
 public class Addproduct implements Serializable {
 
-    private String name,quantity,category,farmerid,cropid,bid;
-    private   int CropPrice;
+    private String name,quantity,category,farmerid,cropid,bid,farmername,farmerphone,userid;
+    private  int CropPrice;
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getFarmername() {
+        return farmername;
+    }
+
+    public void setFarmername(String farmername) {
+        this.farmername = farmername;
+    }
+
+    public String getFarmerphone() {
+        return farmerphone;
+    }
+
+    public void setFarmerphone(String farmerphone) {
+        this.farmerphone = farmerphone;
+    }
+
     public Addproduct() {
 
     }
