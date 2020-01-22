@@ -45,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="219dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="253dp"
         android:ems="10"
         android:hint="Quantity"
         android:inputType="textPersonName" />
@@ -63,15 +63,29 @@
         android:text="Category"
         android:textSize="20sp" />
 
+    <EditText
+        android:id="@+id/PriceOfCrop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/quantity"
+        android:layout_marginTop="36dp"
+        android:hint="CropPrice"
+        android:inputType="number"
+        android:textSize="20sp" />
+
     <ProgressBar
         android:id="@+id/progressBaraddproduct"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="232dp"
+        android:layout_height="37dp"
+        android:layout_below="@+id/PriceOfCrop"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="164dp"
-        android:layout_marginTop="284dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="213dp"
+        android:layout_marginBottom="478dp"
         android:visibility="invisible" />
 
 </RelativeLayout>

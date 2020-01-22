@@ -6,16 +6,18 @@ import java.io.Serializable;
 
 public class Addproduct implements Serializable {
 
-    public String name,quantity,category;
+    private String name,quantity,category;
+    private   int CropPrice;
 
     public Addproduct() {
 
     }
 
-    public Addproduct(String name, String quantity, String category) {
+    public Addproduct(String name, String quantity, String category,int CropPrice) {
         this.name = name;
         this.quantity = quantity;
         this.category = category;
+        this.CropPrice=CropPrice;
     }
 
     public String getName() {
@@ -40,5 +42,13 @@ public class Addproduct implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getCropPrice() {
+        return CropPrice;
+    }
+
+    public void setCropPrice(int cropPrice) {
+        CropPrice = cropPrice;
     }
 }
