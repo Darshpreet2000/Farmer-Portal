@@ -114,7 +114,7 @@ public class add_product extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void add_product_to_database(){
          String productname=name.getText().toString();
-         String productquantity=quantity.getText().toString();
+         String productquantity=quantity.getText().toString()+" Kg";
          String spinneritem=spinner.getSelectedItem().toString();
          String s=CropPrice.getText().toString();
          if(s.isEmpty()){
