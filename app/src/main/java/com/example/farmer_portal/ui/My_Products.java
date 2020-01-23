@@ -68,6 +68,7 @@ public class My_Products extends Fragment {
                 myproductList.clear();
                 for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
                     Addproduct restaurantModel = dataValues.getValue(Addproduct.class);
+                    restaurantModel.setCropid(dataValues.getKey());
                     myproductList.add(restaurantModel);
                 }
 

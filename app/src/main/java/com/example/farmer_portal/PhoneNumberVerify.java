@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -212,6 +213,11 @@ public class PhoneNumberVerify extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
+
+                                                    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                                                    SharedPreferences.Editor editor = pref.edit();
+                                                    editor.putString("name",user.getName());
+                                                    editor.commit();
                                                     Toast.makeText(PhoneNumberVerify.this, "Registration Successful", Toast.LENGTH_SHORT).show();
                                                     finish();
                                                     startActivity(new Intent(PhoneNumberVerify.this, NavigationDrawer.class));
