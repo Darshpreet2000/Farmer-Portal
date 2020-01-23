@@ -50,7 +50,7 @@
         android:layout_marginTop="253dp"
         android:ems="10"
         android:hint="Quantity"
-        android:inputType="textPersonName" />
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/category"

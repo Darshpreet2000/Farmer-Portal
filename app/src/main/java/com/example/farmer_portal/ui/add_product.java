@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmer_portal.Classes.Addproduct;
@@ -114,7 +115,7 @@ public class add_product extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void add_product_to_database(){
          String productname=name.getText().toString();
-         String productquantity=quantity.getText().toString();
+         String productquantity=quantity.getText().toString()+" Kg";
          String spinneritem=spinner.getSelectedItem().toString();
          String s=CropPrice.getText().toString();
          if(s.isEmpty()){
@@ -127,6 +128,10 @@ public class add_product extends Fragment {
              if(productquantity.isEmpty()){
                  quantity.setError("this field is required");
                  quantity.requestFocus();
+             }
+             if(spinneritem.equals("Choose a Category")){
+                 ((TextView)spinner.getSelectedView()).setError("Error message");
+                   spinner.requestFocus();
              }
          }
          else{
