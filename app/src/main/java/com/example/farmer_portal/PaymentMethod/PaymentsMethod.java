@@ -12,17 +12,25 @@ import com.example.farmer_portal.BuyNow;
 import com.example.farmer_portal.R;
 
 public class PaymentsMethod extends AppCompatActivity {
-   Button paytmpay,cash;
+   Button debit,paytmpay,cash;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payments_method);
         paytmpay=findViewById(R.id.paytmpay);
         cash=findViewById(R.id.cash);
+        debit=findViewById(R.id.credit);
         paytmpay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(PaymentsMethod.this, paytm.class);
+                startActivity(intent);
+            }
+        });
+        debit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PaymentsMethod.this,creditcard.class);
                 startActivity(intent);
             }
         });
