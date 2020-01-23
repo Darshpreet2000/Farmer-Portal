@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmer_portal.Classes.Addproduct;
@@ -126,6 +127,10 @@ public class add_product extends Fragment {
              if(productquantity.isEmpty()){
                  quantity.setError("this field is required");
                  quantity.requestFocus();
+             }
+             if(spinneritem.equals("Choose a Category")){
+                 ((TextView)spinner.getSelectedView()).setError("Error message");
+                   spinner.requestFocus();
              }
          }
          else{
