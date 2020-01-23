@@ -21,11 +21,15 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -37,6 +41,7 @@ public class PhoneNumberVerify extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseReference myRef;
     User user;
+    String sender;
     FirebaseDatabase database;
     private String mVerificationId;
 
@@ -45,7 +50,7 @@ public class PhoneNumberVerify extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number_verify);
 
-        String sender=getIntent().getExtras().getString("sender");
+       sender=getIntent().getExtras().getString("sender");
         if (sender.equals("register")) {
             user= (User) getIntent().getSerializableExtra("User");
 
@@ -125,9 +130,40 @@ public class PhoneNumberVerify extends AppCompatActivity {
     private void verifyVerificationCode(String code) {
         //creating the credential
         try{
-            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+            final PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
             //signing the user
-            signInWithPhoneAuthCredential(credential);
+            myRef.orderByChild("phone").equalTo(no).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.getValue() != null && sender.equals("register")) {
+                        //it means user already registered
+                        //Add code to show your prompt
+                        Toast.makeText(PhoneNumberVerify.this, "This Number is already registered  Please Login", Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(new Intent(PhoneNumberVerify.this, Login.class));
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+                    } else if (dataSnapshot.getValue() == null && sender.equals("login")) {
+                        Toast.makeText(PhoneNumberVerify.this, "This Number is not registered  Please Register", Toast.LENGTH_LONG).show();
+                        finish();
+                        startActivity(new Intent(PhoneNumberVerify.this, Register.class));
+                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    } else if (dataSnapshot.getValue() != null && sender.equals("login")) {
+                        //user is exists, just do login
+                        signInWithPhoneAuthCredential(credential);
+                    }
+                    else{
+                        signInWithPhoneAuthCredential(credential);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
@@ -142,34 +178,67 @@ public class PhoneNumberVerify extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            boolean isNew = task.getResult().getAdditionalUserInfo().isNewUser();
-                            if (isNew) {
-                                //do create new user
-                                myRef.child(Objects.requireNonNull(mAuth.getUid())).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(PhoneNumberVerify.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                            finish();
-                                            startActivity(new Intent(PhoneNumberVerify.this, NavigationDrawer.class));
-                                            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-                                        } else {
-                                            Toast.makeText(PhoneNumberVerify.this, "Registration Failed", Toast.LENGTH_SHORT).show();
-                                        }
+
+                            myRef.orderByChild("phone").equalTo(no).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.getValue() != null&&sender.equals("register")){
+                                        //it means user already registered
+                                        //Add code to show your prompt
+                                        Toast.makeText(PhoneNumberVerify.this, "This Number is already registered  Please Login", Toast.LENGTH_LONG).show();
+                                        finish();
+                                        startActivity(new Intent(PhoneNumberVerify.this, Login.class));
+                                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+
+                                    }else if(dataSnapshot.getValue() == null&&sender.equals("login")){
+                                        Toast.makeText(PhoneNumberVerify.this, "This Number is not registered  Please Register", Toast.LENGTH_LONG).show();
+                                        finish();
+                                        startActivity(new Intent(PhoneNumberVerify.this, Register.class));
+                                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                                    }
+                                    else if(dataSnapshot.getValue() != null&&sender.equals("login")){
+                                        //user is exists, just do login
+                                        Toast.makeText(PhoneNumberVerify.this, "Logging Successful", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        startActivity(new Intent(PhoneNumberVerify.this, NavigationDrawer.class));
+                                        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                                    }
+                                    else{
+                                        //It is new users
+                                        //write an entry to your user table
+                                        //writeUserEntryToDB();
+                                        //do create new user
+                                        myRef.child(Objects.requireNonNull(mAuth.getUid())).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(PhoneNumberVerify.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                    startActivity(new Intent(PhoneNumberVerify.this, NavigationDrawer.class));
+                                                    overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                                                } else {
+                                                    Toast.makeText(PhoneNumberVerify.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                                                }
+
+                                            }
+
+                                        });
+
 
                                     }
+                                }
 
-                                });
-                            }
-                            else{
-                                //user is exists, just do login
-                                Toast.makeText(PhoneNumberVerify.this, "Logging Successful", Toast.LENGTH_SHORT).show();
-                                finish();
-                                startActivity(new Intent(PhoneNumberVerify.this, NavigationDrawer.class));
-                                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+
+
+
+
 
                             }
-                        }
 
                          else {
 
