@@ -64,8 +64,10 @@ public class Bids_to_my_crops extends Fragment {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                        for(DataSnapshot datavalues:dataSnapshot.getChildren()) {
-                                           bidding Bidding = dataSnapshot.getValue(bidding.class);
-                                           biddingList.add(Bidding);
+                                           for (final DataSnapshot datamessage : datavalues.getChildren()) {
+                                               bidding Bidding = datamessage.getValue(bidding.class);
+                                               biddingList.add(Bidding);
+                                           }
                                        }
                                     }
 
