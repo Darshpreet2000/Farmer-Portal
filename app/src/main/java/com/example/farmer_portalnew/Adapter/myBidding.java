@@ -32,13 +32,13 @@ public class myBidding extends RecyclerView.Adapter<myBidding.Biddingholder> {
     @Override
     public void onBindViewHolder(@NonNull Biddingholder holder, int position) {
         final Addproduct currentnote=mybiddinglist.get(position);
-        holder.title.setText(currentnote.getName());
+        holder.title.setText(currentnote.getCropName());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
         holder.category.setText(String.valueOf(currentnote.getCategory()));
-        holder.Bid.setText(String.valueOf(currentnote.getBid()));
-        holder.cropprice.setText(String.valueOf(currentnote.getCropPrice()));
-        holder.phone.setText(String.valueOf(currentnote.getFarmerphone()));
-        holder.name.setText(String.valueOf(currentnote.getFarmername()));
+     //   holder.Bid.setText(String.valueOf(currentnote.getBid()));
+        holder.cropprice.setText(String.valueOf(currentnote.getPrice()));
+     //   holder.phone.setText(String.valueOf(currentnote.getFarmerphone()));
+   //     holder.name.setText(String.valueOf(currentnote.getFarmername()));
         holder.farmerorbuyer.setText("Farmer Details");
     }
 

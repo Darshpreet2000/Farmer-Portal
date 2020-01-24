@@ -53,12 +53,12 @@ public class My_Products extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Products").child(Objects.requireNonNull(mAuth.getUid()));
+        myRef = database.getReference("crops");
         progressBarrecyclemy=(ProgressBar) view.findViewById(R.id.progressBarmyproducts);
         progressBarrecyclemy.setVisibility(View.VISIBLE);
         recyclerViewmy=view.findViewById(R.id.recycleviewmyproducts);
         Log.v("",""+ myproductList.size());
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.orderByChild("cropOwner").equalTo(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -66,7 +66,7 @@ public class My_Products extends Fragment {
                 myproductList.clear();
                 for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
                     Addproduct restaurantModel = dataValues.getValue(Addproduct.class);
-                    restaurantModel.setCropid(dataValues.getKey());
+                     restaurantModel.setCropid(dataValues.getKey());
                     myproductList.add(restaurantModel);
                 }
 

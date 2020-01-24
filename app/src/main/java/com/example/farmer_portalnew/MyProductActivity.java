@@ -1,10 +1,12 @@
 package com.example.farmer_portalnew;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -36,7 +38,7 @@ public class MyProductActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                myRef.child(addproduct.getCropid()).removeValue();
+           //     myRef.child(addproduct.getCropid()).removeValue();
                 Toast.makeText(MyProductActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
                 Intent intent =new Intent(MyProductActivity.this,NavigationDrawer.class);
                 startActivity(intent);
@@ -66,6 +68,7 @@ public class MyProductActivity extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +86,7 @@ public class MyProductActivity extends AppCompatActivity {
         addproduct = (Addproduct) intent.getSerializableExtra("class");
       //  Toast.makeText(this, addproduct.getCropid().toString(), Toast.LENGTH_LONG).show();
         //Log.d("msg",addproduct.getName());
-        String s = "Name:" + addproduct.getName();
+        String s = "Name:" + addproduct.getCropName();
         CropName.setText(s);
         s = "product type:" + addproduct.getCategory();
         ProductType.setText(s);
@@ -91,7 +94,7 @@ public class MyProductActivity extends AppCompatActivity {
         s = "quantity:" + addproduct.getQuantity();
         quantity.setText(s);
 
-        s = "price:" + addproduct.getCropPrice();
+        s = "price:" + addproduct.getPrice();
         Price.setText(s);
 
     }

@@ -60,17 +60,15 @@ String farmerid,price,name,quantity;
        addbdidding=findViewById(R.id.addbidding);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("FarmerBidding");
-        myBid = database.getReference("MyBidding");
+        myRef = database.getReference("users");
         Intent intent=getIntent();
        final Addproduct addproduct=(Addproduct) intent.getSerializableExtra("class");
         //Log.d("msg",addproduct.getName());
-       String s="Name:"+addproduct.getName()+"\n";
+       String s="Name:"+addproduct.getCropName()+"\n";
         s+="product type:"+addproduct.getCategory()+"\n";
         s+="quantity:"+addproduct.getQuantity()+"\n";
-        s+="price:"+addproduct.getCropPrice();
-        farmerid=addproduct.getFarmerid();
-        name=addproduct.getCropid();
+        s+="price:"+addproduct.getPrice();
+        farmerid=addproduct.getCropOwner();
         quantity=addproduct.getQuantity();
         textView.setText(s);
        addbdidding.setOnClickListener(new View.OnClickListener() {
@@ -83,9 +81,10 @@ String farmerid,price,name,quantity;
                    return;
                }
                price=enterbiddingprice.getText().toString();
-               bidding Bidding=new bidding(farmerid,price,name,quantity,mAuth.getUid());
+               bidding Bidding=new bidding(mAuth.getUid(),price,addproduct.getCropOwner(),addproduct.getCropid());
              //Need to change here so that price gets updated only in that crop
-               myRef.child(farmerid).child(name).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+               myBid=database.getReference("crops");
+               myBid.child(addproduct.getCropid()).child("bids").push().setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){
@@ -96,7 +95,8 @@ String farmerid,price,name,quantity;
                        }
                    }
                });
-               myBid.child(Objects.requireNonNull(mAuth.getUid())).child(name).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+               myRef.child(Objects.requireNonNull(mAuth.getUid())).child("bids").push().setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){
@@ -107,6 +107,8 @@ String farmerid,price,name,quantity;
                        }
                    }
                });
+
+
            }
        });
     }

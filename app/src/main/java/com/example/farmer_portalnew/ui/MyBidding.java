@@ -16,6 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+
+import com.example.farmer_portalnew.Adapter.bidmycrop;
+import com.example.farmer_portalnew.Adapter.myProduct_adapter;
 import com.example.farmer_portalnew.Classes.User;
 import com.example.farmer_portalnew.Adapter.myBidding;
 import com.example.farmer_portalnew.Classes.Addproduct;
@@ -30,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,7 +46,7 @@ private List<Addproduct> biddingList=new ArrayList<>();
     public MyBidding() {
         // Required empty public constructor
     }
-    DatabaseReference myRef,productref,user;
+    DatabaseReference myRef,productref;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
 
@@ -60,66 +64,39 @@ private List<Addproduct> biddingList=new ArrayList<>();
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("MyBidding/"+mAuth.getUid());
+        myRef = database.getReference("users");
+        productref = database.getReference("crops");
         mAuth = FirebaseAuth.getInstance();
         progressBarrecyclemybidding = (ProgressBar) view.findViewById(R.id.progressBarmybidding);
         progressBarrecyclemybidding.setVisibility(View.VISIBLE);
         recyclerViewmybidding = view.findViewById(R.id.recycleviewmybidding);
         recyclerViewmybidding.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.child(Objects.requireNonNull(mAuth.getUid())).child("bids").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                biddingList.clear();
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-           //     biddingList.clear();
-                for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
-                        Log.v("", dataValues.toString());
-                        final bidding restaurantModel = dataValues.getValue(bidding.class);
-                   final String bid=restaurantModel.getPrice();
-                    productref = database.getReference("Products/"+restaurantModel.getFarmerid());
-                    productref.equalTo(restaurantModel.name);
-                    productref.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
-                                    Log.v("", dataValues.toString());
-                                    final Addproduct addproduct=dataValues.getValue(Addproduct.class);
-                                    addproduct.setBid(bid);
-                                  user=database.getReference("User_details/"+restaurantModel.getFarmerid());
-                                  user.addValueEventListener(new ValueEventListener() {
-                                      @Override
-                                      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            User user=dataSnapshot.getValue(User.class);
-                                            Log.v("Bidding My",""+user.getPhoneNo());
-                                              addproduct.setFarmerphone(user.getPhoneNo());
-                                              addproduct.setFarmername(user.getName());
-                                          biddingList.add(addproduct);
-                                          myBidding Product_adapter=new myBidding(biddingList);
-                                          recyclerViewmybidding.setAdapter(Product_adapter);
-                                          recyclerViewmybidding.setHasFixedSize(true);
-                                          progressBarrecyclemybidding.setVisibility(View.GONE);
-                                      }
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataValues:dataSnapshot.getChildren()){
 
-                                      @Override
-                                      public void onCancelled(@NonNull DatabaseError databaseError) {
+                    bidding mybidding=dataValues.getValue(bidding.class);
+                    String cropid=mybidding.getCropid();
+                    productref.child(cropid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Addproduct addproduct;
+                            addproduct =dataSnapshot.getValue(Addproduct.class);
+                            biddingList.add(addproduct);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                      }
-                                  });
-                                    //add farmer  name and mobile from its id and cropid
+                        }
+                    });
 
-                                }
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    myBidding Product_adapter=new myBidding( biddingList);
 
-                            }
-                        });
-
+                    recyclerViewmybidding.setAdapter(Product_adapter);
+                    recyclerViewmybidding.setHasFixedSize(true);
+                    progressBarrecyclemybidding.setVisibility(View.GONE);
                 }
-
-
 
 
             }

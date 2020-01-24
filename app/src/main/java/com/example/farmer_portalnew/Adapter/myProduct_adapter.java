@@ -40,7 +40,7 @@ public class myProduct_adapter extends RecyclerView.Adapter<myProduct_adapter.my
     @Override
     public void onBindViewHolder(@NonNull myProduct_adapter.myProductholder holder, int position) {
        final Addproduct currentnote=product.get(position);
-        holder.title.setText(currentnote.getName());
+        holder.title.setText(currentnote.getCropName());
         holder.category.setText(currentnote.getCategory());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {

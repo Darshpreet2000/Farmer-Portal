@@ -1,5 +1,6 @@
 package com.example.farmer_portalnew.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -44,15 +45,15 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
     @Override
     public void onBindViewHolder(@NonNull Productholder holder, int position) {
         final Addproduct currentnote=product.get(position);
-        holder.title.setText(currentnote.getName());
+        holder.title.setText(currentnote.getCropName());
         holder.category.setText(currentnote.getCategory());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
-        holder.CropPrice.setText(String.valueOf(currentnote.getCropPrice()));
+        holder.CropPrice.setText(String.valueOf(currentnote.getPrice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = getApplicationContext();
+                @SuppressLint("RestrictedApi") Context context = getApplicationContext();
                 Intent intent = new Intent(context, displayproduct.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("class", (Serializable) currentnote);

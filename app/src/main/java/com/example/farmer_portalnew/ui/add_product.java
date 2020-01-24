@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
+import com.example.farmer_portalnew.Classes.crops;
 import com.example.farmer_portalnew.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,7 +37,7 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  */
 public class add_product extends Fragment {
-    DatabaseReference myRef;
+    DatabaseReference userref,myRef;
     ProgressBar progressBar;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
@@ -47,7 +48,7 @@ public class add_product extends Fragment {
     FloatingActionButton floatingActionButton;
     ProgressBar progressBaraddproduct;
     Spinner spinner;
-    EditText name,quantity,CropPrice;
+    EditText name,quantity,CropPrice,minquantity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,7 +56,9 @@ public class add_product extends Fragment {
         View view= inflater.inflate(R.layout.fragment_add_product, container, false);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Products");
+        userref = database.getReference("users");
+        myRef = database.getReference("crops");
+        minquantity=(EditText) view.findViewById(R.id.minquantity);
         spinner = (Spinner) view.findViewById(R.id.spinnercategory);
         name = (EditText) view.findViewById(R.id.productname);
         progressBaraddproduct = (ProgressBar) view.findViewById(R.id.progressBaraddproduct);
@@ -111,12 +114,14 @@ public class add_product extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void add_product_to_database(){
          String productname=name.getText().toString();
+         String minq=minquantity.getText().toString()+" Kg";
          String productquantity=quantity.getText().toString()+" Kg";
          String spinneritem=spinner.getSelectedItem().toString();
          String s=CropPrice.getText().toString();
-         if(s.isEmpty()){
+         if(s.isEmpty()) {
              CropPrice.setError("this Field is required");
              CropPrice.requestFocus();
+         }
              if(productname.isEmpty()){
                  name.setError("this field is required");
                  name.requestFocus();
@@ -125,30 +130,45 @@ public class add_product extends Fragment {
                  quantity.setError("this field is required");
                  quantity.requestFocus();
              }
+             if(minq.isEmpty()){
+                 minquantity.setError("this field is required");
+                 minquantity.requestFocus();
+             }
              if(spinneritem.equals("Choose a Category")){
                  ((TextView)spinner.getSelectedView()).setError("Error message");
                    spinner.requestFocus();
              }
-         }
+
          else{
              if(spinneritem!="Choose a Category") {
-
-                 int PriceOfCrop = 0 + Integer.parseInt(s);
-
+                 final crops crop=new crops();
                  String farmerid = mAuth.getUid();
-                 Addproduct addproduct = new Addproduct(productname, productquantity, spinneritem, farmerid, PriceOfCrop);
-                 myRef.child(Objects.requireNonNull(mAuth.getUid())).push().setValue(addproduct).addOnCompleteListener(new OnCompleteListener<Void>() {
+                 Addproduct addproduct = new Addproduct(productname,farmerid,minq,s, productquantity,spinneritem);
+                 final String key=myRef.push().getKey();
+                 myRef.child(key).setValue(addproduct).addOnCompleteListener(new OnCompleteListener<Void>() {
                      @Override
                      public void onComplete(@NonNull Task<Void> task) {
                          progressBaraddproduct.setVisibility(View.GONE);
                          if (task.isSuccessful()) {
                              Toast.makeText(getContext(), "Added Successful", Toast.LENGTH_SHORT).show();
+                               crop.setCropOwner(mAuth.getUid());
+                               crop.setCropId(key);
+
+                             userref.child(Objects.requireNonNull(mAuth.getUid())).child("crops").push().setValue(crop).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                 @Override
+                                 public void onComplete(@NonNull Task<Void> task) {
+
+                                 }
+                             });
+
 
                          } else {
                              Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                          }
                      }
                  });
+
+
 
              }
              else {
