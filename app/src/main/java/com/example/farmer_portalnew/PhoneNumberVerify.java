@@ -60,7 +60,7 @@ public class PhoneNumberVerify extends AppCompatActivity {
         otp = (EditText) findViewById(R.id.otp);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("User_details");
+        myRef = database.getReference("users");
 
         sendVerificationCode(no);
 
@@ -130,7 +130,7 @@ public class PhoneNumberVerify extends AppCompatActivity {
         try{
             final PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
             //signing the user
-            myRef.orderByChild("phone").equalTo(no).addListenerForSingleValueEvent(new ValueEventListener() {
+            myRef.orderByChild("phoneNo").equalTo(no).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.getValue() != null && sender.equals("register")) {
@@ -177,7 +177,7 @@ public class PhoneNumberVerify extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 
-                            myRef.orderByChild("phone").equalTo(no).addListenerForSingleValueEvent(new ValueEventListener() {
+                            myRef.orderByChild("phoneNo").equalTo(no).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.getValue() != null&&sender.equals("register")){

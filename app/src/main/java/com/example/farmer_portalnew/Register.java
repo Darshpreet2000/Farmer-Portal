@@ -71,7 +71,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("User_details");
+        myRef = database.getReference("users");
 
         setupspinner();
         RegisterAs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
