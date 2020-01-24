@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
+import com.example.farmer_portalnew.Classes.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,7 +24,7 @@ import java.util.Objects;
 public class MyProductActivity extends AppCompatActivity {
     TextView CropName,ProductType,quantity,Price,Catagory;
     Addproduct addproduct;
-    DatabaseReference myRef;
+    DatabaseReference myRef,userref;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
     public  void DeleteThisCrop(View view){
@@ -38,7 +39,8 @@ public class MyProductActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-           //     myRef.child(addproduct.getCropid()).removeValue();
+              myRef.removeValue();
+              userref.removeValue();
                 Toast.makeText(MyProductActivity.this, "Deleted", Toast.LENGTH_SHORT).show();
                 Intent intent =new Intent(MyProductActivity.this,NavigationDrawer.class);
                 startActivity(intent);
@@ -79,11 +81,19 @@ public class MyProductActivity extends AppCompatActivity {
         Price=findViewById(R.id.MyPrice);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Products").child(Objects.requireNonNull(mAuth.getUid()));
+        myRef = database.getReference("crops");
+        userref = database.getReference("users");
+        userref=userref.child(Objects.requireNonNull(mAuth.getUid())).child("crops");
+       // insideUserCropId=database.getReference("users").child(mAuth.getUid()).
 
         Intent intent = getIntent();
 
         addproduct = (Addproduct) intent.getSerializableExtra("class");
+        String cropId=addproduct.getCropid();
+        userref=userref.child(addproduct.getInsideUserCropId());
+
+       myRef= myRef.child(cropId);
+
       //  Toast.makeText(this, addproduct.getCropid().toString(), Toast.LENGTH_LONG).show();
         //Log.d("msg",addproduct.getName());
         String s = "Name:" + addproduct.getCropName();
