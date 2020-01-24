@@ -4,7 +4,23 @@ import java.io.Serializable;
 
 public class Addproduct implements Serializable {
 
-    String cropName,cropOwner,minQuantity,price,quantity,category,cropid;
+    String cropName;
+    String cropOwner;
+    String minQuantity;
+    String price;
+    String quantity;
+    String category;
+    String cropid;
+
+    public String getInsideUserCropId() {
+        return InsideUserCropId;
+    }
+
+    public void setInsideUserCropId(String insideUserCropId) {
+        InsideUserCropId = insideUserCropId;
+    }
+
+    String InsideUserCropId;
 
     public String getCropid() {
         return cropid;
