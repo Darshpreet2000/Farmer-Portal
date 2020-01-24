@@ -4,44 +4,7 @@ import java.io.Serializable;
 
 public class Addproduct implements Serializable {
 
-    private String name,quantity,category,farmerid,cropid,bid,farmername,farmerphone,userid;
-    private  int CropPrice;
-
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
-    public String getFarmername() {
-        return farmername;
-    }
-
-    public void setFarmername(String farmername) {
-        this.farmername = farmername;
-    }
-
-    public String getFarmerphone() {
-        return farmerphone;
-    }
-
-    public void setFarmerphone(String farmerphone) {
-        this.farmerphone = farmerphone;
-    }
-
-    public Addproduct() {
-
-    }
-
-    public String getBid() {
-        return bid;
-    }
-
-    public void setBid(String bid) {
-        this.bid = bid;
-    }
+    String cropName,cropOwner,minQuantity,price,quantity,category,cropid;
 
     public String getCropid() {
         return cropid;
@@ -51,29 +14,48 @@ public class Addproduct implements Serializable {
         this.cropid = cropid;
     }
 
-    public String getFarmerid() {
-        return farmerid;
+    public Addproduct() {
     }
 
-    public void setFarmerid(String farmerid) {
-        this.farmerid = farmerid;
-    }
-
-
-    public Addproduct(String name, String quantity, String category, String farmerid,  int cropPrice) {
-        this.name = name;
+    public Addproduct(String cropName, String cropOwner, String minQuality, String price, String quantity, String category) {
+        this.cropName = cropName;
+        this.cropOwner = cropOwner;
+        this.minQuantity = minQuantity;
+        this.price = price;
         this.quantity = quantity;
         this.category = category;
-        this.farmerid = farmerid;
-        CropPrice = cropPrice;
     }
 
-    public String getName() {
-        return name;
+    public String getCropName() {
+        return cropName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCropName(String cropName) {
+        this.cropName = cropName;
+    }
+
+    public String getCropOwner() {
+        return cropOwner;
+    }
+
+    public void setCropOwner(String cropOwner) {
+        this.cropOwner = cropOwner;
+    }
+
+    public String getMinQuantity() {
+        return minQuantity;
+    }
+
+    public void setMinQuantity(String minQuantity) {
+        this.minQuantity = minQuantity;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getQuantity() {
@@ -90,13 +72,5 @@ public class Addproduct implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public int getCropPrice() {
-        return CropPrice;
-    }
-
-    public void setCropPrice(int cropPrice) {
-        CropPrice = cropPrice;
     }
 }

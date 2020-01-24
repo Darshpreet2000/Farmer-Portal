@@ -40,14 +40,27 @@
         android:hint="Product Name"
         android:inputType="textPersonName" />
 
+
+    <EditText
+        android:id="@+id/minquantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="253dp"
+        android:ems="10"
+        android:hint="Min Quantity"
+        android:inputType="number" />
+
     <EditText
         android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="253dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="311dp"
         android:ems="10"
         android:hint="Quantity"
         android:inputType="number" />

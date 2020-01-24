@@ -19,7 +19,7 @@ import java.util.Objects;
 public class UpdateYourCrop extends AppCompatActivity {
     EditText UpdateName,UpdatePrice,UpdateQuantity;
     Button updateCropDetail;
-    DatabaseReference myRef;
+    DatabaseReference myRef,userref;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
 
@@ -29,8 +29,8 @@ public class UpdateYourCrop extends AppCompatActivity {
         setContentView(R.layout.activity_update_your_crop);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Products").child(Objects.requireNonNull(mAuth.getUid()));
-
+        myRef = database.getReference("crops");
+       userref=database.getReference("users");
         final Intent intent = getIntent();
       final Addproduct  addproduct = (Addproduct) intent.getSerializableExtra("class");
       UpdateName =findViewById(R.id.CropNameEt);
@@ -41,14 +41,14 @@ public class UpdateYourCrop extends AppCompatActivity {
 
         //Log.d("msg",addproduct.getName());
 
-        String s = "Name:" + addproduct.getName();
+        String s = "Name:" + addproduct.getCropName();
 
         s = "product type:" + addproduct.getCategory();
 
 
         s = "quantity:" + addproduct.getQuantity();
 
-        s = "price:" + addproduct.getCropPrice();
+        s = "price:" + addproduct.getPrice();
       //  Toast.makeText(this, addproduct.getCropid(), Toast.LENGTH_SHORT).show();
       updateCropDetail.setOnClickListener(new View.OnClickListener() {
           @Override
@@ -59,18 +59,17 @@ public class UpdateYourCrop extends AppCompatActivity {
 
              if(s.isEmpty()){
 
-                 updateProduct.setCropPrice(addproduct.getCropPrice());
+                 updateProduct.setPrice(addproduct.getPrice());
 
              }else {
-                 int i=Integer.parseInt(s);
-                 updateProduct.setCropPrice(i);
+                 updateProduct.setPrice(s);
 
              }
              if(updatedCropName.isEmpty()){
-                 updateProduct.setName(addproduct.getName());
+                 updateProduct.setCropName(addproduct.getCropName());
              }
              else {
-                 updateProduct.setName(updatedCropName);
+                 updateProduct.setCropName(updatedCropName);
              }
              if(updatedQuantity.isEmpty()){
                  updateProduct.setQuantity(addproduct.getQuantity());
@@ -79,10 +78,8 @@ public class UpdateYourCrop extends AppCompatActivity {
                  updateProduct.setQuantity(updatedQuantity);
              }
              updateProduct.setCategory(addproduct.getCategory());
-             updateProduct.setCropid(addproduct.getCropid());
+
              myRef.child(addproduct.getCropid()).setValue(updateProduct);
-
-
               Toast.makeText(UpdateYourCrop.this, "updated successfully ", Toast.LENGTH_SHORT).show();
                 /*Intent intent1 =new Intent(UpdateYourCrop.this,MyProductActivity.class);
                 startActivity(intent1);*/

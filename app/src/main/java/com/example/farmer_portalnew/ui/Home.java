@@ -49,7 +49,7 @@ public class Home extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Products");
+        myRef = database.getReference("crops");
         progressBarrecycle=(ProgressBar) view.findViewById(R.id.progressBarrecycle);
         progressBarrecycle.setVisibility(View.VISIBLE);
         recyclerView=view.findViewById(R.id.recycleview);
@@ -64,12 +64,11 @@ public class Home extends Fragment {
                 productList.clear();
                 List<User> UserList=new ArrayList<>(); //Moved here
                 for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
-                    for (DataSnapshot messageSnapshot: dataValues.getChildren()) {
-                      Log.v("",messageSnapshot.toString());
-                        Addproduct restaurantModel = messageSnapshot.getValue(Addproduct.class);
-                        restaurantModel.setCropid(messageSnapshot.getKey());
+                      Log.v("",dataValues.toString());
+                        Addproduct restaurantModel = dataValues.getValue(Addproduct.class);
+                        restaurantModel.setCropid(dataValues.getKey());
+                   //     restaurantModel.(dataValues.getKey());
                         productList.add(restaurantModel);
-                    }
                 }
                 //Following data was inserted for debugging  purpose
 /*
