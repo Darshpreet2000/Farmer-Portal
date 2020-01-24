@@ -44,6 +44,7 @@ public class DisplayTransportDetail extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 User restaurantModel = dataSnapshot.getValue(User.class);
                 name =restaurantModel.getName();
                 PHoneNumber =restaurantModel.getPhoneNo();
@@ -59,7 +60,7 @@ public class DisplayTransportDetail extends AppCompatActivity {
         });
      ///  String phoneNo= myRef.child("phoneNo").toString();
 
-       String text= name +'\n'+PHoneNumber;
+       String text= "Name "+name +'\n'+"Phone Number " +PHoneNumber;
        textView.setText(text);
 
 
