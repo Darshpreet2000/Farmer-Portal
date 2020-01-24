@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.farmer_portal">
+    package="com.example.farmer_portalnew">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,31 +14,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PaymentMethod.creditcard"></activity>
-        <activity android:name=".UpdateYourCrop"></activity>
+        <activity android:name="com.example.farmer_portalnew.PaymentMethod.creditcard"></activity>
+        <activity android:name="com.example.farmer_portalnew.UpdateYourCrop"></activity>
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
             android:configChanges="keyboardHidden|orientation|keyboard"
             android:screenOrientation="portrait" />
-        <activity android:name=".PaymentMethod.Cash" />
-        <activity android:name=".PaymentMethod.paytm" />
-        <activity android:name=".PaymentMethod.PaymentsMethod" />
-        <activity android:name=".BuyNow" />
-        <activity android:name=".MyProductActivity" />
-        <activity android:name=".displayproduct" />
+        <activity android:name="com.example.farmer_portalnew.PaymentMethod.Cash" />
+        <activity android:name="com.example.farmer_portalnew.PaymentMethod.paytm" />
+        <activity android:name="com.example.farmer_portalnew.PaymentMethod.PaymentsMethod" />
+        <activity android:name="com.example.farmer_portalnew.BuyNow" />
+        <activity android:name="com.example.farmer_portalnew.MyProductActivity" />
+        <activity android:name="com.example.farmer_portalnew.displayproduct" />
         <activity
-            android:name=".Login"
+            android:name="com.example.farmer_portalnew.Login"
             android:theme="@style/FormTheme" />
-        <activity android:name=".PhoneNumberVerify" />
+        <activity android:name="com.example.farmer_portalnew.PhoneNumberVerify" />
         <activity
-            android:name=".NavigationDrawer"
+            android:name="com.example.farmer_portalnew.NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
             android:theme="@style/FormTheme" />
         <activity
-            android:name=".Register"
+            android:name="com.example.farmer_portalnew.Register"
             android:theme="@style/FormTheme" />
         <activity
-            android:name=".WelcomeSplash"
+            android:name="com.example.farmer_portalnew.WelcomeSplash"
             android:theme="@style/FormTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
