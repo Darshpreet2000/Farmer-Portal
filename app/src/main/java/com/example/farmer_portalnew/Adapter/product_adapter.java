@@ -48,8 +48,8 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         holder.title.setText(currentnote.getCropName());
         holder.category.setText(currentnote.getCategory());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
-        holder.CropPrice.setText(String.valueOf(currentnote.getPrice()));
-
+        holder.CropPrice.setText(String.valueOf(currentnote.getPrice())+" Rupees");
+         holder.minquantity.setText(String.valueOf(currentnote.getMinQuantity()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +74,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         private TextView title;
         private TextView category;
         private TextView quantity;
+        private  TextView minquantity;
         private  TextView CropPrice;
 
         public Productholder(@NonNull View itemView) {
@@ -82,6 +83,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
             category=itemView.findViewById(R.id.productcategory);
             quantity=itemView.findViewById(R.id.productquantity);
             CropPrice=itemView.findViewById(R.id.PriceOfCrop1);
+            minquantity=itemView.findViewById(R.id.minproductquantity);
         }
     }
 

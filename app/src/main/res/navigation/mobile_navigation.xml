@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/Home">
+    app:startDestination="@id/crops">
 
     <fragment
         android:id="@+id/AddProduct"
@@ -21,11 +21,6 @@
         android:label="fragment_transport"
         tools:layout="@layout/fragment_transport" />
     <fragment
-        android:id="@+id/Home"
-        android:name="com.example.farmer_portalnew.ui.Home"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
         android:id="@+id/my_Products"
         android:name="com.example.farmer_portalnew.ui.My_Products"
         android:label="fragment_my__products"
@@ -40,5 +35,10 @@
         android:name="com.example.farmer_portalnew.ui.Bids_to_my_crops"
         android:label="fragment_bids_to_my_crops"
         tools:layout="@layout/fragment_bids_to_my_crops" />
+    <fragment
+        android:id="@+id/crops"
+        android:name="com.example.farmer_portalnew.ui.crops"
+        android:label="fragment_crops"
+        tools:layout="@layout/fragment_crops" />
 
 </navigation>
