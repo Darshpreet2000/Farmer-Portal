@@ -27,7 +27,7 @@ import java.util.List;
 public class crops extends Fragment {
 
   ListView cropslist;
-  List<String> CropCategory =new ArrayList<>();
+  List<String> CropCategory ;
   public crops() {
         // Required empty public constructor
     }
@@ -35,6 +35,7 @@ public class crops extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        CropCategory=new ArrayList<>();
         cropslist=view.findViewById(R.id.croplist);
         CropCategory.add("Vegetable");
         CropCategory.add("Pulses");
@@ -43,6 +44,7 @@ public class crops extends Fragment {
         CropCategory.add("Dry Fruits");
         CropCategory.add("Others");
         cropslist.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.croplistitem,R.id.categorytitle,CropCategory));
+
        cropslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

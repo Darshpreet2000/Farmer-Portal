@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.displaycategorycrop"></activity>
+        <activity android:name=".cart.cart"></activity>
+        <activity android:name=".ui.displaycategorycrop" />
         <activity android:name=".DisplayTransportDetail" />
         <activity android:name=".TransportFacilty" />
         <activity android:name=".PaymentMethod.creditcard" />
