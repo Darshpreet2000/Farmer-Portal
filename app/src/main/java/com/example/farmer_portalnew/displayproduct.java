@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
+import com.example.farmer_portalnew.Classes.bidclass;
 import com.example.farmer_portalnew.Classes.bidding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -69,10 +70,11 @@ String farmerid,price,name,quantity;
                    return;
                }
                price=enterbiddingprice.getText().toString();
-               bidding Bidding=new bidding(mAuth.getUid(),price,addproduct.getCropOwner(),addproduct.getCropid());
+               bidclass Bidclass=new bidclass(addproduct.getPrice(),addproduct.getCropid(),addproduct.getCropName(),addproduct.getCropOwner(),"100",price);
+              // bidding Bidding=new bidding(mAuth.getUid(),price,addproduct.getCropOwner(),addproduct.getCropid());
              //Need to change here so that price gets updated only in that crop
-               myBid=database.getReference("crops");
-               myBid.child(addproduct.getCropid()).child("bids").push().setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+               myBid=database.getReference("users");
+               myBid.child(mAuth.getUid()).child("bids").push().setValue(Bidclass).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){
@@ -84,7 +86,9 @@ String farmerid,price,name,quantity;
                    }
                });
 
-               myRef.child(Objects.requireNonNull(mAuth.getUid())).child("bids").push().setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+             String key=myRef.child(addproduct.getCropOwner()).child("bids").push().getKey();
+               bidding Bidding=new bidding(key,mAuth.getUid(),addproduct.getCropid());
+               myRef.child(addproduct.getCropOwner()).child("bids").child(key).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){

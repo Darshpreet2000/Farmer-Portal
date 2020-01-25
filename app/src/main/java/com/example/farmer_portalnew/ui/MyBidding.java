@@ -1,6 +1,7 @@
 package com.example.farmer_portalnew.ui;
 
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -11,19 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.example.farmer_portalnew.Adapter.bidmycrop;
-import com.example.farmer_portalnew.Adapter.myProduct_adapter;
-import com.example.farmer_portalnew.Classes.User;
 import com.example.farmer_portalnew.Adapter.myBidding;
-import com.example.farmer_portalnew.Classes.Addproduct;
-import com.example.farmer_portalnew.Classes.bidding;
+import com.example.farmer_portalnew.Classes.bidclass;
 import com.example.farmer_portalnew.R;
+import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,11 +39,11 @@ public class MyBidding extends Fragment {
 
     ProgressBar progressBarrecyclemybidding;
     RecyclerView recyclerViewmybidding;
-private List<Addproduct> biddingList=new ArrayList<>();
+private List<bidclass> biddingList=new ArrayList<bidclass>();
     public MyBidding() {
         // Required empty public constructor
     }
-    DatabaseReference myRef,productref;
+    DatabaseReference myRef,search;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
 
@@ -65,7 +62,6 @@ private List<Addproduct> biddingList=new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users");
-        productref = database.getReference("crops");
         mAuth = FirebaseAuth.getInstance();
         progressBarrecyclemybidding = (ProgressBar) view.findViewById(R.id.progressBarmybidding);
         progressBarrecyclemybidding.setVisibility(View.VISIBLE);
@@ -74,34 +70,16 @@ private List<Addproduct> biddingList=new ArrayList<>();
         myRef.child(Objects.requireNonNull(mAuth.getUid())).child("bids").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataValues:dataSnapshot.getChildren()){
+                for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
 
-                    bidding mybidding=dataValues.getValue(bidding.class);
-                    String cropid=mybidding.getCropid();
-
-                    productref = database.getReference("crops/"+cropid);
-                    productref.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                                Addproduct addproduct;
-                            addproduct = dataSnapshot.getValue(Addproduct.class);
-                            biddingList.add(addproduct);
-
-
-                            myBidding Product_adapter=new myBidding( biddingList);
-
-                            recyclerViewmybidding.setAdapter(Product_adapter);
-                            recyclerViewmybidding.setHasFixedSize(true);
-                            progressBarrecyclemybidding.setVisibility(View.GONE);
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-
+                  bidclass myBidding = dataValues.getValue(bidclass.class);
+                    biddingList.add(myBidding);
                 }
+
+                myBidding Product_adapter = new myBidding(biddingList);
+                recyclerViewmybidding.setAdapter(Product_adapter);
+                recyclerViewmybidding.setHasFixedSize(true);
+                progressBarrecyclemybidding.setVisibility(View.GONE);
             }
 
             @Override
@@ -110,5 +88,6 @@ private List<Addproduct> biddingList=new ArrayList<>();
             }
 
         });
+
     }
 }

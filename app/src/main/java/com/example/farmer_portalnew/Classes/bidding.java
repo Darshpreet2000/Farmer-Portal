@@ -1,47 +1,38 @@
 package com.example.farmer_portalnew.Classes;
 
 public class bidding {
-    public String bidderid, price,farmerid,cropid;
+    public String bidId,buyerId,cropId;
 
     public bidding() {
     }
 
-    public String getBidderid() {
-        return bidderid;
+    public bidding(String bidId, String buyerId, String cropId) {
+        this.bidId = bidId;
+        this.buyerId = buyerId;
+        this.cropId = cropId;
     }
 
-    public void setBidderid(String bidderid) {
-        this.bidderid = bidderid;
+    public String getBidId() {
+        return bidId;
     }
 
-    public String getPrice() {
-        return price;
+    public void setBidId(String bidId) {
+        this.bidId = bidId;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public String getBuyerId() {
+        return buyerId;
     }
 
-    public String getFarmerid() {
-        return farmerid;
+    public void setBuyerId(String buyerId) {
+        this.buyerId = buyerId;
     }
 
-    public void setFarmerid(String farmerid) {
-        this.farmerid = farmerid;
+    public String getCropId() {
+        return cropId;
     }
 
-    public String getCropid() {
-        return cropid;
-    }
-
-    public void setCropid(String cropid) {
-        this.cropid = cropid;
-    }
-
-    public bidding(String bidderid, String price, String farmerid, String cropid) {
-        this.bidderid = bidderid;
-        this.price = price;
-        this.farmerid = farmerid;
-        this.cropid = cropid;
+    public void setCropId(String cropId) {
+        this.cropId = cropId;
     }
 }

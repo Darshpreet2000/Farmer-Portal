@@ -21,6 +21,6 @@ public class WelcomeSplash extends AppCompatActivity {
                 finish();
 
             }
-        },2000);
+        },3000);
     }
 }
