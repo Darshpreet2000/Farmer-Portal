@@ -78,12 +78,22 @@ private List<Addproduct> biddingList=new ArrayList<>();
 
                     bidding mybidding=dataValues.getValue(bidding.class);
                     String cropid=mybidding.getCropid();
-                    productref.child(cropid).addValueEventListener(new ValueEventListener() {
+
+                    productref = database.getReference("crops/"+cropid);
+                    productref.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Addproduct addproduct;
-                            addproduct =dataSnapshot.getValue(Addproduct.class);
+
+                                Addproduct addproduct;
+                            addproduct = dataSnapshot.getValue(Addproduct.class);
                             biddingList.add(addproduct);
+
+
+                            myBidding Product_adapter=new myBidding( biddingList);
+
+                            recyclerViewmybidding.setAdapter(Product_adapter);
+                            recyclerViewmybidding.setHasFixedSize(true);
+                            progressBarrecyclemybidding.setVisibility(View.GONE);
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -91,14 +101,7 @@ private List<Addproduct> biddingList=new ArrayList<>();
                         }
                     });
 
-                    myBidding Product_adapter=new myBidding( biddingList);
-
-                    recyclerViewmybidding.setAdapter(Product_adapter);
-                    recyclerViewmybidding.setHasFixedSize(true);
-                    progressBarrecyclemybidding.setVisibility(View.GONE);
                 }
-
-
             }
 
             @Override

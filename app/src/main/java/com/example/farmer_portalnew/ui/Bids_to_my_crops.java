@@ -1,10 +1,12 @@
 package com.example.farmer_portalnew.ui;
 
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.farmer_portalnew.Adapter.bidmycrop;
+import com.example.farmer_portalnew.Adapter.myBidding;
+import com.example.farmer_portalnew.Classes.Addproduct;
 import com.example.farmer_portalnew.Classes.bidding;
 import com.example.farmer_portalnew.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +48,7 @@ public class Bids_to_my_crops extends Fragment {
     DatabaseReference myRef,productref,user;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -53,45 +59,39 @@ public class Bids_to_my_crops extends Fragment {
         progressBarrecyclebidmycrop.setVisibility(View.VISIBLE);
         recyclerViewbidmycrop = view.findViewById(R.id.recycleviewbidmycrop);
         recyclerViewbidmycrop.setLayoutManager(new LinearLayoutManager(getContext()));
-     myRef.orderByChild("cropOwner").equalTo(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
+        myRef.child(Objects.requireNonNull(mAuth.getUid())).child("bids").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot dataValues:dataSnapshot.getChildren()) {
-                            for (final DataSnapshot datamessage : dataValues.getChildren()) {
-                                String key = dataSnapshot.getKey();
-                                database.getReference().orderByKey().equalTo(key).addValueEventListener(new ValueEventListener() {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataValues:dataSnapshot.getChildren()){
 
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                       for(DataSnapshot datavalues:dataSnapshot.getChildren()) {
-                                           for (final DataSnapshot datamessage : datavalues.getChildren()) {
-                                               bidding Bidding = datamessage.getValue(bidding.class);
-                                               biddingList.add(Bidding);
-                                           }
-                                       }
-                                    }
+                    bidding mybidding=dataValues.getValue(bidding.class);
+                    String cropid=mybidding.getCropid();
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    productref = database.getReference("crops/"+cropid);
+                    productref.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                    }
-                                });
-                            }
-                            bidmycrop Product_adapter = new bidmycrop(biddingList);
-                            recyclerViewbidmycrop.setAdapter(Product_adapter);
-                            recyclerViewbidmycrop.setHasFixedSize(true);
-                            progressBarrecyclebidmycrop.setVisibility(View.GONE);
+                            Addproduct addproduct;
+                            addproduct = dataSnapshot.getValue(Addproduct.class);
 
                         }
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
 
-                    }
-
-                });
+                }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+    }
 
 
 
