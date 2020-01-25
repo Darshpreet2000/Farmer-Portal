@@ -49,8 +49,8 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.Tran
         final TransportDetail currentnote=myproductList.get(position);
         //String tranpostdetail=data[position];
 
-        String s=currentnote.getDropLoc().toString()+'\n';
-        s+='\n'+currentnote.getPickLoc()+'\n'+currentnote.getPrice();
+        String s="\nDrop Location :" +currentnote.getDropLoc().toString();
+        s+="\n\nPickupLoc :"+currentnote.getPickLoc()+'\n'+"\nAvailable balance:"+currentnote.getPrice();
 
 
         holder.textView.setText(s);

@@ -66,14 +66,14 @@ public class transport extends Fragment {
         progressBaraddproduct=view.findViewById(R.id.progressBaraddproduct);
         final RecyclerView recyclerView=view.findViewById(R.id.TransportRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        final String[] s =new String[100];
+       // final String[] s =new String[100];
 
         myRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 myproductList.clear();
-                int i=0;
+               // int i=0;
                 for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
                     TransportDetail restaurantModel = dataValues.getValue(TransportDetail.class);
                     myproductList.add(restaurantModel);
