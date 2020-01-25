@@ -14,8 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cart.cart"
-            android:label="Cart"></activity>
+        <activity android:name=".biddingview.BuyerDetails"></activity>
+        <activity android:name=".biddingview.FarmerDetails" />
+        <activity
+            android:name=".cart.cart"
+            android:label="Cart" />
         <activity android:name=".ui.displaycategorycrop" />
         <activity android:name=".DisplayTransportDetail" />
         <activity android:name=".TransportFacilty" />
