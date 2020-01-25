@@ -100,7 +100,7 @@
             android:layout_marginBottom="9dp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonbidprice"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"

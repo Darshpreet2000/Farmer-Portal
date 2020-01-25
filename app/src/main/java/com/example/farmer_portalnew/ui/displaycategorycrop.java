@@ -15,6 +15,7 @@ import com.example.farmer_portalnew.Adapter.product_adapter;
 import com.example.farmer_portalnew.Classes.Addproduct;
 import com.example.farmer_portalnew.R;
 import com.example.farmer_portalnew.cart.cart;
+import com.example.farmer_portalnew.displayproduct;
 import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,9 +86,10 @@ public class displaycategorycrop extends AppCompatActivity {
 
                     @Override
                     public void onbuttonclicked(int position) {
-
                       startActivity(new Intent(displaycategorycrop.this, cart.class));
                     }
+
+
                 });
 
                 recyclerView.setAdapter(Product_adapter);
