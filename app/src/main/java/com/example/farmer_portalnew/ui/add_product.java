@@ -1,6 +1,7 @@
 package com.example.farmer_portalnew.ui;
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
 import com.example.farmer_portalnew.Classes.crops;
+import com.example.farmer_portalnew.NavigationDrawer;
 import com.example.farmer_portalnew.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,6 +42,8 @@ public class add_product extends Fragment {
     DatabaseReference userref,myRef;
     ProgressBar progressBar;
     FirebaseDatabase database;
+    String key;
+     String insideUserCropid;
     private FirebaseAuth mAuth;
 
     public add_product() {
@@ -143,8 +147,13 @@ public class add_product extends Fragment {
              if(spinneritem!="Choose a Category") {
                  final crops crop=new crops();
                  String farmerid = mAuth.getUid();
+
+                         userref=userref.child(Objects.requireNonNull(mAuth.getUid())).child("crops");
+                         insideUserCropid=userref.push().getKey();
                  Addproduct addproduct = new Addproduct(productname,farmerid,minq,s, productquantity,spinneritem);
-                 final String key=myRef.push().getKey();
+
+                   key=myRef.push().getKey();
+                 addproduct.setInsideUserCropId(insideUserCropid);
                  myRef.child(key).setValue(addproduct).addOnCompleteListener(new OnCompleteListener<Void>() {
                      @Override
                      public void onComplete(@NonNull Task<Void> task) {
@@ -154,9 +163,19 @@ public class add_product extends Fragment {
                                crop.setCropOwner(mAuth.getUid());
                                crop.setCropId(key);
 
-                             userref.child(Objects.requireNonNull(mAuth.getUid())).child("crops").push().setValue(crop).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                             userref.child(insideUserCropid).setValue(crop).addOnCompleteListener(new OnCompleteListener<Void>() {
                                  @Override
                                  public void onComplete(@NonNull Task<Void> task) {
+                                     if(task.isSuccessful()){
+                                         Intent intent =new Intent(getContext(), NavigationDrawer.class);
+                                         startActivity(intent);
+
+                                     }
+                                     else {
+                                         Toast.makeText(getContext(), "something wrong please add again ", Toast.LENGTH_SHORT).show();
+                                     }
+
 
                                  }
                              });
