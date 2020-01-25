@@ -28,7 +28,31 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     EditText editTextEmail, editTextPassword,editTextName,editTextPhoneNumber,editTextIndustry,editTextArea;
     private FirebaseAuth mAuth;
     Spinner RegisterAs;
+    Spinner Language;
 
+   private void setupLanguageSpinner(){
+       ArrayList<String> arrayList1 = new ArrayList<>();
+       arrayList1.add("Choose Language");
+       arrayList1.add("English");
+       arrayList1.add("हिन्दी");
+       ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,arrayList1){
+
+           @Override
+           public boolean isEnabled(int position) {
+               if(position==0){
+                   return  false;
+               }
+               else{
+                   return true;
+               }
+           }
+       };
+       arrayAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       Language.setAdapter(arrayAdapter1);
+       Language.setPrompt("Choose Language");
+       Language.setSelection(0, false);
+
+   }
     private void setupspinner(){
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Register As");
@@ -67,6 +91,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         editTextArea = (EditText) findViewById(R.id.Area);
         RegisterAs=findViewById(R.id.RegisterAs);
+        Language=findViewById(R.id.Language);
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -74,6 +100,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         myRef = database.getReference("users");
 
         setupspinner();
+        setupLanguageSpinner();
+
         RegisterAs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -84,7 +112,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             public void onNothingSelected(AdapterView <?> parent) {
             }
         });
-
+        Language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String tutorialsName = parent.getItemAtPosition(position).toString();
+                Toast.makeText(parent.getContext(), "Selected: " + tutorialsName,Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView <?> parent) {
+            }
+        });
 
         if(mAuth.getCurrentUser()!=null){
             Intent intent=new Intent(getApplicationContext(), NavigationDrawer.class);
@@ -103,10 +140,17 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         final String name = editTextName.getText().toString().trim();
         final String phonenumber = editTextPhoneNumber.getText().toString().trim();
         String RegisteredAs=RegisterAs.getSelectedItem().toString();
+        String UserLanguage=Language.getSelectedItem().toString();
+
 
         final String area = editTextArea.getText().toString().trim();
         if(RegisteredAs=="Register As"){
             Toast.makeText(this, "Please Select Register As", Toast.LENGTH_SHORT).show();
+
+        }
+        if(RegisteredAs=="Choose Language"){
+            Toast.makeText(this, "Please Select Your Language", Toast.LENGTH_SHORT).show();
+
 
         }
 
@@ -144,10 +188,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             return;
         }
 
-        if(RegisteredAs!="Register As")
+        if(RegisteredAs!="Register As"&&UserLanguage!="Choose Language")
         {
             Intent intent=new Intent(Register.this,PhoneNumberVerify.class);
-            User user =new User(area,email,name,password,phonenumber,RegisteredAs);
+            User user =new User(area,email,name,password,phonenumber,RegisteredAs,UserLanguage);
      //       User user =new User(name,email,phonenumber,area,RegisteredAs);///
             intent.putExtra("User", user);
             intent.putExtra("sender","register");
