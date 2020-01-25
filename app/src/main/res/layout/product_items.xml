@@ -9,9 +9,8 @@
     android:layout_marginStart="8dp">
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:padding="8dp">
-
 
         <TextView
             android:id="@+id/productcategory"
@@ -29,21 +28,88 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_height="wrap_content"
             android:text="Product Name" />
+<TextView
+    android:layout_below="@id/producttitle"
+    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/tq"
+    android:text="Quantity"/>
 
 
         <TextView
+            android:layout_margin="4dp"
             android:id="@+id/productquantity"
-            android:layout_below="@id/producttitle"
+            android:layout_below="@id/tq"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantity" />
         <TextView
+            android:layout_below="@id/productquantity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mq"
+            android:text="Min Quantity"/>
+        <TextView
+
+            android:layout_margin="4dp"
+            android:id="@+id/minproductquantity"
+            android:layout_below="@id/mq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min Quantity" />
+
+        <TextView
+            android:layout_below="@id/minproductquantity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tp"
+            android:text="Crop Price"/>
+        <TextView
+
+            android:layout_margin="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/PriceOfCrop1"
-            android:layout_below="@+id/productquantity"
+            android:layout_below="@+id/tp"
             android:text="CropPrice"/>
 
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/productcategory"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="105dp"
+            android:layout_marginRight="151dp"
+            android:background="@drawable/edit_box_background"
+            android:hint="10"
+            android:inputType="numberSigned" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/white"
+            android:id="@+id/addtocart"
+            android:background="@color/primary"
+            android:text="Add to Cart"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="17dp"
+            android:layout_marginBottom="9dp" />
+
+        <Button
+            android:id="@+id/buttonbidprice"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="17dp"
+            android:background="@color/dark_cyan"
+            android:text="Bid Price"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -3,42 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/Home">
+    app:startDestination="@id/crops">
 
     <fragment
         android:id="@+id/AddProduct"
-        android:name="com.example.farmer_portal.ui.add_product"
+        android:name="com.example.farmer_portalnew.ui.add_product"
         android:label="fragment_add_product"
         tools:layout="@layout/fragment_add_product" />
     <fragment
         android:id="@+id/Payment"
-        android:name="com.example.farmer_portal.ui.payments"
+        android:name="com.example.farmer_portalnew.ui.payments"
         android:label="fragment_payments"
         tools:layout="@layout/fragment_payments" />
     <fragment
         android:id="@+id/Transport"
-        android:name="com.example.farmer_portal.ui.transport"
+        android:name="com.example.farmer_portalnew.ui.transport"
         android:label="fragment_transport"
         tools:layout="@layout/fragment_transport" />
     <fragment
-        android:id="@+id/Home"
-        android:name="com.example.farmer_portal.ui.Home"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
         android:id="@+id/my_Products"
-        android:name="com.example.farmer_portal.ui.My_Products"
+        android:name="com.example.farmer_portalnew.ui.My_Products"
         android:label="fragment_my__products"
         tools:layout="@layout/fragment_my__products" />
     <fragment
         android:id="@+id/bidding"
-        android:name="com.example.farmer_portal.ui.MyBidding"
+        android:name="com.example.farmer_portalnew.ui.MyBidding"
         android:label="fragment_my_bidding"
         tools:layout="@layout/fragment_my_bidding" />
     <fragment
         android:id="@+id/bidmycrop"
-        android:name="com.example.farmer_portal.ui.Bids_to_my_crops"
+        android:name="com.example.farmer_portalnew.ui.Bids_to_my_crops"
         android:label="fragment_bids_to_my_crops"
         tools:layout="@layout/fragment_bids_to_my_crops" />
+    <fragment
+        android:id="@+id/crops"
+        android:name="com.example.farmer_portalnew.ui.crops"
+        android:label="fragment_crops"
+        tools:layout="@layout/fragment_crops" />
+    <fragment
+        android:id="@+id/setting"
+        android:name="com.example.farmer_portalnew.ui.setting"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 
 </navigation>

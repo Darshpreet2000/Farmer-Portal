@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:title="Signout"
         android:id="@+id/signout"/>
+    <item
+        android:id="@+id/cart"
+        android:icon="@drawable/ic_shopping"
+        android:title="Item"
+        app:showAsAction="always" />
 </menu>

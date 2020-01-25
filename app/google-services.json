@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "3309989986",
-    "firebase_url": "https://farmer-e8dda.firebaseio.com",
-    "project_id": "farmer-e8dda",
-    "storage_bucket": "farmer-e8dda.appspot.com"
+    "project_number": "991630094906",
+    "firebase_url": "https://sih2020-de6fd.firebaseio.com",
+    "project_id": "sih2020-de6fd",
+    "storage_bucket": "sih2020-de6fd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:3309989986:android:bdd0e20d1085333605213b",
+        "mobilesdk_app_id": "1:991630094906:android:9dfe10501358f265013b03",
         "android_client_info": {
-          "package_name": "com.example.farmer_portal"
+          "package_name": "com.example.farmer_portalnew"
         }
       },
       "oauth_client": [
         {
-          "client_id": "3309989986-o02ndk4t5ak48vopuho51fph9ck97dss.apps.googleusercontent.com",
+          "client_id": "991630094906-3657c4mt6enmk5u6qhnl477jhiog4uo3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.farmer_portal",
+            "package_name": "com.example.farmer_portalnew",
             "certificate_hash": "7a27616d1932ec5cd5d2bacabefdfe23810a0919"
           }
         },
         {
-          "client_id": "3309989986-2pf58uoh6d2ircfasj8po1dtkr9eipq7.apps.googleusercontent.com",
+          "client_id": "991630094906-edsuomi1m5hs5ra9ju0qh46q839f3cpn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCiT_5yPyvKdptW3eMyAQ-0BbxTIzdEM1w"
+          "current_key": "AIzaSyBfjl-pTJIGvkT-DifQ9OuDsO72gdG91sE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "3309989986-2pf58uoh6d2ircfasj8po1dtkr9eipq7.apps.googleusercontent.com",
+              "client_id": "991630094906-edsuomi1m5hs5ra9ju0qh46q839f3cpn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
