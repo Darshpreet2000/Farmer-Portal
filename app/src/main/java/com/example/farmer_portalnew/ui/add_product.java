@@ -99,6 +99,7 @@ public class add_product extends Fragment {
       arrayList.add("Pulses");
       arrayList.add("Fruits");
       arrayList.add("Spices");
+      arrayList.add("Beverages");
       arrayList.add("Dry Fruits");
       arrayList.add("Other");
       ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, arrayList){

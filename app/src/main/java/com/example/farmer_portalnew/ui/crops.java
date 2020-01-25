@@ -41,6 +41,7 @@ public class crops extends Fragment {
         CropCategory.add("Pulses");
         CropCategory.add("Fruits");
         CropCategory.add("Spices");
+        CropCategory.add("Beverages");
         CropCategory.add("Dry Fruits");
         CropCategory.add("Others");
         cropslist.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.croplistitem,R.id.categorytitle,CropCategory));
