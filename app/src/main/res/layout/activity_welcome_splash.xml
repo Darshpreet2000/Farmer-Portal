@@ -7,18 +7,13 @@
     android:background="#72C775"
     tools:context=".WelcomeSplash">
 
-    <TextView
-        android:id="@+id/productDescreption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Happy Farmer"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageView5"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.393" />
+        app:srcCompat="@drawable/splash"
+        tools:layout_editor_absoluteY="213dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,14 +33,14 @@ public class bidmycrop extends RecyclerView.Adapter<bidmycrop.bidmycropholder> {
     @Override
     public void onBindViewHolder(@NonNull bidmycropholder holder, int position) {
         final bidding currentnote=bidmycroplist.get(position);
-        holder.title.setText(currentnote.getPrice());
+        holder.title.setText(currentnote.getCropId());
       //  holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
     //    holder.category.setText(String.valueOf(currentnote.getCategory()));
  //       holder.Bid.setText(String.valueOf(currentnote.getBid()));
    //     holder.cropprice.setText(String.valueOf(currentnote.getCropPrice()));
     //    holder.phone.setText(String.valueOf(currentnote.getFarmerphone()));
      //   holder.name.setText(String.valueOf(currentnote.getFarmername()));
-        holder.farmerorbuyer.setText("Buyer Details");
+  //      holder.farmerorbuyer.setText("Buyer Details");
     }
 
     @Override
@@ -56,12 +56,12 @@ public class bidmycrop extends RecyclerView.Adapter<bidmycrop.bidmycropholder> {
         public bidmycropholder(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.producttitle1);
-            category=itemView.findViewById(R.id.productcategory1);
+         //   category=itemView.findViewById(R.id.productcategory1);
             quantity=itemView.findViewById(R.id.productquantity1);
-           farmerorbuyer=itemView.findViewById(R.id.farmerorbuyer);
+          // farmerorbuyer=itemView.findViewById(R.id.farmerorbuyer);
             Bid=itemView.findViewById(R.id.Bidprice);
-            name=itemView.findViewById(R.id.mybidname);
-            phone=itemView.findViewById(R.id.mybidphone);
+            //name=itemView.findViewById(R.id.mybidname);
+           // phone=itemView.findViewById(R.id.mybidphone);
             cropprice=itemView.findViewById(R.id.PriceOfCrop1);
         }
     }

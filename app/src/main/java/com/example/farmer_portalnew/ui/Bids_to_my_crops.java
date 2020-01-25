@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 
 import com.example.farmer_portalnew.Adapter.bidmycrop;
 import com.example.farmer_portalnew.Adapter.myBidding;
+import com.example.farmer_portalnew.Adapter.myProduct_adapter;
 import com.example.farmer_portalnew.Classes.Addproduct;
 import com.example.farmer_portalnew.Classes.bidding;
 import com.example.farmer_portalnew.R;
@@ -54,7 +55,7 @@ public class Bids_to_my_crops extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("crops");
+        myRef = database.getReference("users");
         progressBarrecyclebidmycrop = (ProgressBar) view.findViewById(R.id.progressBarbidmycrop);
         progressBarrecyclebidmycrop.setVisibility(View.VISIBLE);
         recyclerViewbidmycrop = view.findViewById(R.id.recycleviewbidmycrop);
@@ -63,26 +64,18 @@ public class Bids_to_my_crops extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataValues:dataSnapshot.getChildren()){
-
                     bidding mybidding=dataValues.getValue(bidding.class);
-                    String cropid=mybidding.getCropid();
-
-                    productref = database.getReference("crops/"+cropid);
-                    productref.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            Addproduct addproduct;
-                            addproduct = dataSnapshot.getValue(Addproduct.class);
-
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+               //     String cropid=mybidding.getCropid();
+                  biddingList.add(mybidding);
+                //    productref = database.getReference("crops/"+cropid);
 
                 }
+
+                recyclerViewbidmycrop.setLayoutManager(new LinearLayoutManager(getContext()));
+                bidmycrop Product_adapter=new bidmycrop( biddingList);
+                recyclerViewbidmycrop.setAdapter(Product_adapter);
+                recyclerViewbidmycrop.setHasFixedSize(true);
+                progressBarrecyclebidmycrop.setVisibility(View.GONE);
             }
 
             @Override

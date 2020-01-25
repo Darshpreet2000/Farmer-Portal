@@ -39,6 +39,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
     public interface OnItemClicked {
         void onItemClick(int position);
         void onbuttonclicked(int position);
+     //   void onbidclicked(int position);
     }
 
     @NonNull
@@ -57,19 +58,19 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
         holder.CropPrice.setText(String.valueOf(currentnote.getPrice())+" Rupees");
          holder.minquantity.setText(String.valueOf(currentnote.getMinQuantity()));
+      holder.bidprice.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              @SuppressLint("RestrictedApi") Context context = getApplicationContext();
+              Intent intent = new Intent(context, displayproduct.class);
+              intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+              intent.putExtra("class", (Serializable) currentnote);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                @SuppressLint("RestrictedApi") Context context = getApplicationContext();
-                Intent intent = new Intent(context, displayproduct.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("class", (Serializable) currentnote);
 
+              context.startActivity(intent);
+          }
+      });
 
-                context.startActivity(intent);
-            }
-        });
 
     }
 
@@ -84,7 +85,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         private TextView quantity;
         private  TextView minquantity;
         private  TextView CropPrice;
-      private Button Buttoncart;
+      private Button Buttoncart,bidprice;
         public Productholder(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.producttitle);
@@ -94,11 +95,14 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
             minquantity=itemView.findViewById(R.id.minproductquantity);
            Buttoncart=itemView.findViewById(R.id.addtocart);
            Buttoncart.setOnClickListener(this);
+           bidprice=itemView.findViewById(R.id.buttonbidprice);
+           bidprice.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
             onClick.onbuttonclicked(getAdapterPosition());
+           // onClick.onbidclicked(getAdapterPosition());
         }
     }
 
