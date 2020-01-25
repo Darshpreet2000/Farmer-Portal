@@ -2,6 +2,7 @@ package com.example.farmer_portalnew.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.farmer_portalnew.BuyNow;
-import com.example.farmer_portalnew.Classes.Addproduct;
 import com.example.farmer_portalnew.Classes.TransportDetail;
 import com.example.farmer_portalnew.DisplayTransportDetail;
-import com.example.farmer_portalnew.MyProductActivity;
 import com.example.farmer_portalnew.R;
-import com.example.farmer_portalnew.displayproduct;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,9 +48,12 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.Tran
 
         String s="\nDrop Location :" +currentnote.getDropLoc().toString();
         s+="\n\nPickupLoc :"+currentnote.getPickLoc()+'\n'+"\nAvailable balance:"+currentnote.getPrice();
+        Log.d("value",s);
 
 
-        holder.textView.setText(s);
+        holder.source.setText("From: "+currentnote.getPickLoc());
+        holder.price.setText("Price:   Rs. "+currentnote.getPrice());
+        holder.destination.setText("To: "+currentnote.getDropLoc());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,10 +75,12 @@ public class TransportAdapter extends RecyclerView.Adapter<TransportAdapter.Tran
     }
 
     public  class  TransportViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        TextView source,destination,price;
         public TransportViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView=itemView.findViewById(R.id.TransportDetail);
+            source=itemView.findViewById(R.id.source);
+            destination=itemView.findViewById(R.id.destinations);
+            price=itemView.findViewById(R.id.pricevalue);
 
         }
     }
