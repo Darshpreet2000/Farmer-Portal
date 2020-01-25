@@ -2,20 +2,18 @@ package com.example.farmer_portalnew.Classes;
 
 import java.io.Serializable;
 
-public class bidclass implements Serializable {
-    String  actualPrice,cropId,cropName,cropOwner,offerQuantity,offerPrice;
+public class farmerclass implements Serializable {
+    String  actualPrice,cropId,cropName,cropOwner,offerQuantity,offerPrice,buyerid;
 
-
-    public bidclass() {
+    public farmerclass() {
     }
 
-    public bidclass(String actualPrice, String cropId, String cropName, String cropOwner, String offerQuantity, String offerPrice) {
-        this.actualPrice = actualPrice;
-        this.cropId = cropId;
-        this.cropName = cropName;
-        this.cropOwner = cropOwner;
-        this.offerQuantity = offerQuantity;
-        this.offerPrice = offerPrice;
+    public String getBuyerid() {
+        return buyerid;
+    }
+
+    public void setBuyerid(String buyerid) {
+        this.buyerid = buyerid;
     }
 
     public String getActualPrice() {
@@ -63,6 +61,15 @@ public class bidclass implements Serializable {
     }
 
     public void setOfferPrice(String offerPrice) {
+        this.offerPrice = offerPrice;
+    }
+
+    public farmerclass(String actualPrice, String cropId, String cropName, String cropOwner, String offerQuantity, String offerPrice) {
+        this.actualPrice = actualPrice;
+        this.cropId = cropId;
+        this.cropName = cropName;
+        this.cropOwner = cropOwner;
+        this.offerQuantity = offerQuantity;
         this.offerPrice = offerPrice;
     }
 }

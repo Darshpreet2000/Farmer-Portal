@@ -30,7 +30,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NavigationDrawer extends AppCompatActivity {
 
@@ -40,6 +43,11 @@ public class NavigationDrawer extends AppCompatActivity {
     private User user;
     private FirebaseAuth mAuth;
     private  NavigationView navigationView;
+    ImageView userIcon;
+    public  void userprofiler(View view){
+        
+        Toast.makeText(this, "tapped", Toast.LENGTH_SHORT).show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +56,7 @@ public class NavigationDrawer extends AppCompatActivity {
         setSupportActionBar(toolbar);
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
          navigationView = findViewById(R.id.nav_view);
