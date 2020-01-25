@@ -11,13 +11,10 @@
         android:id="@+id/productDescreption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="28dp"
-        android:text="ThisisnewActivity"
-
-        android:textSize="24sp" />
+        android:layout_margin="10dp"
+        android:text="ThisisnewActivity" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,6 +26,7 @@
             android:id="@+id/biddingprice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:layout_below="@+id/productDescreption"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
@@ -40,26 +38,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/BuyNow"
+            android:textColor="@color/white"
+            android:background="@color/primary"
             android:layout_below="@+id/biddingprice"
             android:layout_alignStart="@+id/biddingprice"
             android:layout_alignEnd="@+id/biddingprice"
-            android:layout_margin="2dp"
-            android:layout_marginBottom="117dp"
+            android:layout_margin="10dp"
             android:text="Bid Price" />
 
-        <Button
-            android:id="@+id/BuyNow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/addbidding"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="2dp"
-            android:layout_gravity="center"
-
-            android:text="BuyNow /ख़रीदे"
-
-            />
     </LinearLayout>
 </RelativeLayout>

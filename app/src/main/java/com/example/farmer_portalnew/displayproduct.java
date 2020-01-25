@@ -29,8 +29,6 @@ import java.util.Objects;
 public class displayproduct extends AppCompatActivity {
     TextView textView;
 
-    Button buyNow;
-
 
    EditText enterbiddingprice;
    Button addbdidding;
@@ -46,16 +44,6 @@ String farmerid,price,name,quantity;
         setContentView(R.layout.activity_displayproduct);
 
         textView=findViewById(R.id.productDescreption);
-        buyNow=findViewById(R.id.BuyNow);
-        buyNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(displayproduct.this,BuyNow.class);
-                ///put something to pass by intent
-                startActivity(intent);
-            }
-        });
-
        enterbiddingprice=findViewById(R.id.biddingprice);
        addbdidding=findViewById(R.id.addbidding);
         mAuth = FirebaseAuth.getInstance();
@@ -64,10 +52,10 @@ String farmerid,price,name,quantity;
         Intent intent=getIntent();
        final Addproduct addproduct=(Addproduct) intent.getSerializableExtra("class");
         //Log.d("msg",addproduct.getName());
-       String s="Name:"+addproduct.getCropName()+"\n";
-        s+="product type:"+addproduct.getCategory()+"\n";
-        s+="quantity:"+addproduct.getQuantity()+"\n";
-        s+="price:"+addproduct.getPrice();
+       String s="Name: "+addproduct.getCropName()+"\n"+"\n";
+        s+="Product type: "+addproduct.getCategory()+"\n"+"\n";
+        s+="Quantity: "+addproduct.getQuantity()+"\n"+"\n";
+        s+="Price: "+addproduct.getPrice();
         farmerid=addproduct.getCropOwner();
         quantity=addproduct.getQuantity();
         textView.setText(s);
