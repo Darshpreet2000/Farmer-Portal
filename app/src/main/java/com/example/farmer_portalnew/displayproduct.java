@@ -74,7 +74,8 @@ String farmerid,price,name,quantity;
               // bidding Bidding=new bidding(mAuth.getUid(),price,addproduct.getCropOwner(),addproduct.getCropid());
              //Need to change here so that price gets updated only in that crop
                myBid=database.getReference("users");
-               myBid.child(mAuth.getUid()).child("bids").push().setValue(Bidclass).addOnCompleteListener(new OnCompleteListener<Void>() {
+               String key=myBid.child(mAuth.getUid()).child("bids").push().getKey();
+               myBid.child(mAuth.getUid()).child("bids").child(key).setValue(Bidclass).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){
@@ -86,9 +87,8 @@ String farmerid,price,name,quantity;
                    }
                });
 
-             String key=myRef.child(addproduct.getCropOwner()).child("bids").push().getKey();
                bidding Bidding=new bidding(key,mAuth.getUid(),addproduct.getCropid());
-               myRef.child(addproduct.getCropOwner()).child("bids").child(key).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+               myRef.child(addproduct.getCropOwner()).child("bids").push().setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){

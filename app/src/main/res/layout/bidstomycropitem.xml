@@ -26,13 +26,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Quantity" />
-      <TextView
-          android:layout_margin="10dp"
-          android:layout_below="@id/productquantity1"
-          android:layout_width="wrap_content"
-          android:id="@+id/originalprice"
-          android:layout_height="wrap_content"
-          android:text="Original Price"/>
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_below="@id/productquantity1"
+            android:layout_width="wrap_content"
+            android:id="@+id/originalprice"
+            android:layout_height="wrap_content"
+            android:text="Original Price"/>
         <TextView
             android:layout_margin="10dp"
             android:layout_width="wrap_content"
@@ -64,16 +64,16 @@
             android:layout_height="wrap_content"/>
 
         <Button
-            android:id="@+id/farmerdetails"
-            android:background="@color/primary"
+            android:id="@+id/buyerdetails"
             android:layout_width="160dp"
-            android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="9dp"
             android:layout_marginBottom="16dp"
-            android:text="View Farmer Details" />
+            android:background="@color/primary"
+            android:text="View Buyer Details"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
