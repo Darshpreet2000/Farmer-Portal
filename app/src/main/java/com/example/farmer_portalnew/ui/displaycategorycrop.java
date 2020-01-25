@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.farmer_portalnew.Adapter.product_adapter;
 import com.example.farmer_portalnew.Classes.Addproduct;
 import com.example.farmer_portalnew.R;
+import com.example.farmer_portalnew.cart.cart;
 import com.firebase.ui.auth.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -55,9 +56,9 @@ public class displaycategorycrop extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 productList.clear();
-                List<User> UserList=new ArrayList<>(); //Moved here
+                List<User> UserList = new ArrayList<>(); //Moved here
                 for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
-                    Log.v("",dataValues.toString());
+                    Log.v("", dataValues.toString());
                     Addproduct restaurantModel = dataValues.getValue(Addproduct.class);
                     restaurantModel.setCropid(dataValues.getKey());
                     //     restaurantModel.(dataValues.getKey());
@@ -75,7 +76,18 @@ public class displaycategorycrop extends AppCompatActivity {
                 restaurantModel1.setCategory("g1");
                 restaurantModel1.setName("name1");
                 productList.add(restaurantModel1);*/
-                product_adapter Product_adapter=new product_adapter(productList);
+                product_adapter Product_adapter = new product_adapter(productList, new product_adapter.OnItemClicked() {
+                    @Override
+                    public void onItemClick(int position) {
+
+                    }
+
+                    @Override
+                    public void onbuttonclicked(int position) {
+
+                      startActivity(new Intent(displaycategorycrop.this, cart.class));
+                    }
+                });
 
                 recyclerView.setAdapter(Product_adapter);
                 recyclerView.setHasFixedSize(true);

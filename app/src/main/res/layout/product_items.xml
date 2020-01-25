@@ -92,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textColor="@color/white"
+            android:id="@+id/addtocart"
             android:background="@color/primary"
             android:text="Add to Cart"
             android:layout_alignParentBottom="true"

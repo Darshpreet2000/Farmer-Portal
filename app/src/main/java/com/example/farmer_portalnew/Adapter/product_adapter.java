@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,9 +30,15 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
     private List<Addproduct> product=new ArrayList<>();
     private OnItemClicked onClick;
 
+    public product_adapter(List<Addproduct> product, OnItemClicked onClick) {
+        this.product = product;
+        this.onClick = onClick;
+    }
+
     //make interface like this
     public interface OnItemClicked {
         void onItemClick(int position);
+        void onbuttonclicked(int position);
     }
 
     @NonNull
@@ -50,6 +57,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
         holder.CropPrice.setText(String.valueOf(currentnote.getPrice())+" Rupees");
          holder.minquantity.setText(String.valueOf(currentnote.getMinQuantity()));
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,13 +78,13 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         return product.size();
     }
 
-    class Productholder extends RecyclerView.ViewHolder{
+    class Productholder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView title;
         private TextView category;
         private TextView quantity;
         private  TextView minquantity;
         private  TextView CropPrice;
-
+      private Button Buttoncart;
         public Productholder(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.producttitle);
@@ -84,6 +92,13 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
             quantity=itemView.findViewById(R.id.productquantity);
             CropPrice=itemView.findViewById(R.id.PriceOfCrop1);
             minquantity=itemView.findViewById(R.id.minproductquantity);
+           Buttoncart=itemView.findViewById(R.id.addtocart);
+           Buttoncart.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            onClick.onbuttonclicked(getAdapterPosition());
         }
     }
 
