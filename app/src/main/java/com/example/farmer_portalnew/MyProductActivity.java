@@ -90,8 +90,6 @@ public class MyProductActivity extends AppCompatActivity {
 
         addproduct = (Addproduct) intent.getSerializableExtra("class");
         String cropId=addproduct.getCropid();
-        userref=userref.child(addproduct.getInsideUserCropId());
-
        myRef= myRef.child(cropId);
 
       //  Toast.makeText(this, addproduct.getCropid().toString(), Toast.LENGTH_LONG).show();

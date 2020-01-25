@@ -75,7 +75,7 @@ public class UpdateYourCrop extends AppCompatActivity {
                  updateProduct.setQuantity(addproduct.getQuantity());
              }
              else {
-                 updateProduct.setQuantity(updatedQuantity);
+                 updateProduct.setQuantity(updatedQuantity+" Kg");
              }
              updateProduct.setCategory(addproduct.getCategory());
 

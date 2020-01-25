@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.farmer_portalnew.Classes.User;
+import com.example.farmer_portalnew.cart.cart;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -56,7 +57,7 @@ public class NavigationDrawer extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.Home)
+                R.id.crops)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -92,6 +93,9 @@ public class NavigationDrawer extends AppCompatActivity {
                      }
                  });
       return true;
+     }
+     else if(item.getItemId()==R.id.cart){
+         startActivity(new Intent(NavigationDrawer.this, cart.class));
      }
         return super.onOptionsItemSelected(item);
     }

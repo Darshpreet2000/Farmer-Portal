@@ -35,7 +35,7 @@ public class myBidding extends RecyclerView.Adapter<myBidding.Biddingholder> {
         holder.title.setText(currentnote.getCropName());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
         holder.category.setText(String.valueOf(currentnote.getCategory()));
-     //   holder.Bid.setText(String.valueOf(currentnote.getBid()));
+    //    holder.Bid.setText(String.valueOf(currentnote.));
         holder.cropprice.setText(String.valueOf(currentnote.getPrice()));
      //   holder.phone.setText(String.valueOf(currentnote.getFarmerphone()));
    //     holder.name.setText(String.valueOf(currentnote.getFarmername()));

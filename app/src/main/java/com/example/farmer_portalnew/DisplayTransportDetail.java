@@ -2,9 +2,11 @@ package com.example.farmer_portalnew;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -29,63 +31,33 @@ public class DisplayTransportDetail extends AppCompatActivity {
     DatabaseReference myRef;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
-    TextView textView;
+    TextView textView,userdetails;
     String name ;
     String PhoneNumber ;
-
+String details;
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_transport_detail);
-        Intent intent=getIntent();
-        transportDetail=(TransportDetail)intent.getSerializableExtra("class");
-        String s=transportDetail.getQueryOwnwe();
+        Intent intent = getIntent();
+        transportDetail = (TransportDetail) intent.getSerializableExtra("class");
+        String s = transportDetail.getQueryOwnwe();
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        textView=findViewById(R.id.displaytransport);
+        textView = findViewById(R.id.displaytransport);
+
+        userdetails = findViewById(R.id.userdetails);
 
 
         myRef = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
-        myRef.addChildEventListener(new ChildEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                s=dataSnapshot.getKey();
-
-
-                    Log.d("item value ",s+ ": "+dataSnapshot.getValue().toString());
-                    name+=dataSnapshot.getValue().toString();
-                    if(s=="name"){
-                        Toast.makeText(DisplayTransportDetail.this,s+" "+dataSnapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
-                        name=s;
-                        Log.d("item value name ",s+ ": "+dataSnapshot.getValue().toString());
-                    }
-                    if(s=="phoneNo"){
-                        Log.d("item value  phone number",s+ ": "+dataSnapshot.getValue().toString());
-                        PhoneNumber=dataSnapshot.getValue().toString();
-                    }
-
-                        ///Set Here Name PHoneNumber and adress of tranport
-
-                   // Log.d("item desc",dataSnapshot.getValue().toString());
-
-
-
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                details = "Name:" + user.getName() + "\n";
+                details += "Phone No" + user.getPhoneNo();
+                userdetails.setText(details);
             }
 
             @Override
@@ -93,12 +65,5 @@ public class DisplayTransportDetail extends AppCompatActivity {
 
             }
         });
-     ///  String phoneNo= myRef.child("phoneNo").toString();
-
-       String text= "Name "+name +'\n'+"Phone Number " +PhoneNumber;
-       textView.setText(text);
-
-
-
     }
 }

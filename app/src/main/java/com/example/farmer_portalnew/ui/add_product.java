@@ -98,6 +98,7 @@ public class add_product extends Fragment {
       arrayList.add("Vegetable");
       arrayList.add("Pulses");
       arrayList.add("Fruits");
+      arrayList.add("Spices");
       arrayList.add("Dry Fruits");
       arrayList.add("Other");
       ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, arrayList){
@@ -153,7 +154,6 @@ public class add_product extends Fragment {
                  Addproduct addproduct = new Addproduct(productname,farmerid,minq,s, productquantity,spinneritem);
 
                    key=myRef.push().getKey();
-                 addproduct.setInsideUserCropId(insideUserCropid);
                  myRef.child(key).setValue(addproduct).addOnCompleteListener(new OnCompleteListener<Void>() {
                      @Override
                      public void onComplete(@NonNull Task<Void> task) {
@@ -164,7 +164,7 @@ public class add_product extends Fragment {
                                crop.setCropId(key);
 
 
-                             userref.child(insideUserCropid).setValue(crop).addOnCompleteListener(new OnCompleteListener<Void>() {
+                             userref.push().setValue(crop).addOnCompleteListener(new OnCompleteListener<Void>() {
                                  @Override
                                  public void onComplete(@NonNull Task<Void> task) {
                                      if(task.isSuccessful()){

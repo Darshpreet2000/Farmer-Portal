@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.crops"
+    android:orientation="vertical">
+    <TextView
+        android:layout_margin="5dp"
+        android:text="Live Stock"
+      android:textColor="@color/primary"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_height="wrap_content"/>
+
+  <ListView
+      android:layout_margin="10dp"
+      android:divider="@android:color/transparent"
+      android:dividerHeight="8dp"
+      tools:listitem="@layout/croplistitem"
+      android:layout_width="match_parent"
+      android:id="@+id/croplist"
+      android:layout_height="match_parent"/>
+
+</LinearLayout>
