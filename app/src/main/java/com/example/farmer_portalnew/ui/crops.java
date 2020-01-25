@@ -41,7 +41,6 @@ public class crops extends Fragment {
         CropCategory.add("Pulses");
         CropCategory.add("Fruits");
         CropCategory.add("Spices");
-        CropCategory.add("Beverages");
         CropCategory.add("Dry Fruits");
         CropCategory.add("Beverages");
         CropCategory.add("Others");
