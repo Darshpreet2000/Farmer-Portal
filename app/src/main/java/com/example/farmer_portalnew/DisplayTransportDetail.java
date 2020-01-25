@@ -5,8 +5,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.farmer_portalnew.Classes.TransportDetail;
@@ -26,7 +30,8 @@ public class DisplayTransportDetail extends AppCompatActivity {
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
     TextView textView,userdetails;
-    String name ;
+   ImageView callNowBtn;
+
     String PhoneNumber ;
 String details;
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -40,8 +45,12 @@ String details;
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         textView = findViewById(R.id.displaytransport);
+        callNowBtn=findViewById(R.id.CallNow);
+
 
         userdetails = findViewById(R.id.displaytransport);
+
+
 
 
         myRef = database.getReference("users").child(Objects.requireNonNull(mAuth.getUid()));
@@ -51,12 +60,23 @@ String details;
                 User user = dataSnapshot.getValue(User.class);
                 details = "Name:" + user.getName() + "\n";
                 details += "Phone No:" + user.getPhoneNo();
+                PhoneNumber=user.getPhoneNo();
 
                 userdetails.setText(details);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        callNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // int k=Integer.parseInt(PhoneNumber);
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+PhoneNumber));
+                startActivity(intent);
 
             }
         });
