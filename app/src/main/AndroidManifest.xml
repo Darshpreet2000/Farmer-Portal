@@ -43,7 +43,7 @@
             android:theme="@style/FormTheme" />
         <activity
             android:name=".WelcomeSplash"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            android:theme="@style/FormTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
