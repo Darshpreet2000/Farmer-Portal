@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:background="#4054C5"
-    android:orientation="vertical">
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:layout_marginStart="8dp">
 
     <TextView
         android:id="@+id/TransportDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#B63DCA"
         android:paddingLeft="20dp"
         android:text="TextView"
         android:textSize="18sp" />
-</LinearLayout>
+</androidx.cardview.widget.CardView>

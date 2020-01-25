@@ -12,15 +12,8 @@ public class Addproduct implements Serializable {
     String category;
     String cropid;
 
-    public String getInsideUserCropId() {
-        return InsideUserCropId;
-    }
 
-    public void setInsideUserCropId(String insideUserCropId) {
-        InsideUserCropId = insideUserCropId;
-    }
 
-    String InsideUserCropId;
 
     public String getCropid() {
         return cropid;
@@ -33,7 +26,7 @@ public class Addproduct implements Serializable {
     public Addproduct() {
     }
 
-    public Addproduct(String cropName, String cropOwner, String minQuality, String price, String quantity, String category) {
+    public Addproduct(String cropName, String cropOwner, String minQuantity, String price, String quantity, String category) {
         this.cropName = cropName;
         this.cropOwner = cropOwner;
         this.minQuantity = minQuantity;
