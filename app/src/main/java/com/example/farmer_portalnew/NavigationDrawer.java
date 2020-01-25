@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.farmer_portalnew.Classes.User;
+import com.example.farmer_portalnew.cart.cart;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,6 +39,7 @@ public class NavigationDrawer extends AppCompatActivity {
     FirebaseDatabase database;
     private User user;
     private FirebaseAuth mAuth;
+    private  NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +50,8 @@ public class NavigationDrawer extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
-        final NavigationView navigationView = findViewById(R.id.nav_view);
+         navigationView = findViewById(R.id.nav_view);
+
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         TextView farmername=(TextView) navigationView.getHeaderView(0).findViewById(R.id.farmername);
@@ -62,7 +65,10 @@ public class NavigationDrawer extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
     }
+
+
 
 
 
@@ -77,6 +83,7 @@ public class NavigationDrawer extends AppCompatActivity {
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.form_options,menu);
+       // inflater.inflate(R.menu.activity_navigation_drawer_drawer,menu);
         return true;
     }
     @Override
@@ -92,6 +99,9 @@ public class NavigationDrawer extends AppCompatActivity {
                      }
                  });
       return true;
+     }
+     else if(item.getItemId()==R.id.cart){
+         startActivity(new Intent(NavigationDrawer.this, cart.class));
      }
         return super.onOptionsItemSelected(item);
     }

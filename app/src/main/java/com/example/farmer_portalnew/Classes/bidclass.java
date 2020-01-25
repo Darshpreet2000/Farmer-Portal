@@ -1,9 +1,35 @@
 package com.example.farmer_portalnew.Classes;
 
 public class bidclass {
-    String  cropName,minQuantity,price,quantity,category,name,phone;
+    String  actualPrice,cropId,cropName,cropOwner,offerQuantity,offerPrice;
+
 
     public bidclass() {
+    }
+
+    public bidclass(String actualPrice, String cropId, String cropName, String cropOwner, String offerQuantity, String offerPrice) {
+        this.actualPrice = actualPrice;
+        this.cropId = cropId;
+        this.cropName = cropName;
+        this.cropOwner = cropOwner;
+        this.offerQuantity = offerQuantity;
+        this.offerPrice = offerPrice;
+    }
+
+    public String getActualPrice() {
+        return actualPrice;
+    }
+
+    public void setActualPrice(String actualPrice) {
+        this.actualPrice = actualPrice;
+    }
+
+    public String getCropId() {
+        return cropId;
+    }
+
+    public void setCropId(String cropId) {
+        this.cropId = cropId;
     }
 
     public String getCropName() {
@@ -14,61 +40,27 @@ public class bidclass {
         this.cropName = cropName;
     }
 
-    public String getMinQuantity() {
-        return minQuantity;
+    public String getCropOwner() {
+        return cropOwner;
     }
 
-    public void setMinQuantity(String minQuantity) {
-        this.minQuantity = minQuantity;
+    public void setCropOwner(String cropOwner) {
+        this.cropOwner = cropOwner;
     }
 
-    public String getPrice() {
-        return price;
+    public String getOfferQuantity() {
+        return offerQuantity;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setOfferQuantity(String offerQuantity) {
+        this.offerQuantity = offerQuantity;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public String getOfferPrice() {
+        return offerPrice;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public bidclass(String cropName, String minQuantity, String price, String quantity, String category, String name, String phone) {
-        this.cropName = cropName;
-        this.minQuantity = minQuantity;
-        this.price = price;
-        this.quantity = quantity;
-        this.category = category;
-        this.name = name;
-        this.phone = phone;
+    public void setOfferPrice(String offerPrice) {
+        this.offerPrice = offerPrice;
     }
 }

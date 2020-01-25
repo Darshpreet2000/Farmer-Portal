@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
+import com.example.farmer_portalnew.Classes.bidclass;
 import com.example.farmer_portalnew.R;
 
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ import java.util.List;
 
 public class myBidding extends RecyclerView.Adapter<myBidding.Biddingholder> {
 
-    public myBidding(List<Addproduct> mybiddinglist) {
+    public myBidding(List<bidclass> mybiddinglist) {
         this.mybiddinglist = mybiddinglist;
     }
 
-    private List<Addproduct> mybiddinglist=new ArrayList<>();
+    private List<bidclass> mybiddinglist=new ArrayList<>();
     @NonNull
     @Override
     public Biddingholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,15 +32,12 @@ public class myBidding extends RecyclerView.Adapter<myBidding.Biddingholder> {
 
     @Override
     public void onBindViewHolder(@NonNull Biddingholder holder, int position) {
-        final Addproduct currentnote=mybiddinglist.get(position);
+        final bidclass currentnote=mybiddinglist.get(position);
         holder.title.setText(currentnote.getCropName());
-        holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
-        holder.category.setText(String.valueOf(currentnote.getCategory()));
-     //   holder.Bid.setText(String.valueOf(currentnote.getBid()));
-        holder.cropprice.setText(String.valueOf(currentnote.getPrice()));
-     //   holder.phone.setText(String.valueOf(currentnote.getFarmerphone()));
-   //     holder.name.setText(String.valueOf(currentnote.getFarmername()));
-        holder.farmerorbuyer.setText("Farmer Details");
+        holder.quantity.setText(String.valueOf(currentnote.getOfferQuantity()));
+        holder.Bid.setText(String.valueOf(currentnote.getOfferPrice()));
+        holder.cropprice.setText(String.valueOf(currentnote.getActualPrice()));
+     //   holder.farmerorbuyer.setText("Farmer Details");
     }
 
     @Override
@@ -55,12 +53,12 @@ public class myBidding extends RecyclerView.Adapter<myBidding.Biddingholder> {
         public Biddingholder(@NonNull View itemView) {
             super(itemView);
             title=itemView.findViewById(R.id.producttitle1);
-            category=itemView.findViewById(R.id.productcategory1);
+//            category=itemView.findViewById(R.id.productcategory1);
             quantity=itemView.findViewById(R.id.productquantity1);
-            farmerorbuyer=itemView.findViewById(R.id.farmerorbuyer);
+            //farmerorbuyer=itemView.findViewById(R.id.farmerorbuyer);
             Bid=itemView.findViewById(R.id.Bidprice);
-           name=itemView.findViewById(R.id.mybidname);
-            phone=itemView.findViewById(R.id.mybidphone);
+          // name=itemView.findViewById(R.id.mybidname);
+            //phone=itemView.findViewById(R.id.mybidphone);
             cropprice=itemView.findViewById(R.id.PriceOfCrop1);
         }
     }

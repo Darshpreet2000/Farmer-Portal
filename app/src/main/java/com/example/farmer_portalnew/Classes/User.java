@@ -3,19 +3,28 @@ package com.example.farmer_portalnew.Classes;
 import java.io.Serializable;
 
 public class User implements Serializable    {
-    private String address,email,name,password,phoneNo,userType;
+    private String address,email,name,password,phoneNo,userType,UserLanguage;
  //   private String name,email,phone,area_Location,RegisterAs;
     public User(){
 
     }
 
-    public User(String address, String email, String name, String password, String phoneNo, String userType) {
+    public User(String address, String email, String name, String password, String phoneNo, String userType,String UserLanguage) {
         this.address = address;
         this.email = email;
         this.name = name;
         this.password = password;
         this.phoneNo = phoneNo;
         this.userType = userType;
+        this.UserLanguage=UserLanguage;
+    }
+
+    public String getUserLanguage() {
+        return UserLanguage;
+    }
+
+    public void setUserLanguage(String userLanguage) {
+        UserLanguage = userLanguage;
     }
 
     public String getAddress() {

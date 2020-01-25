@@ -40,5 +40,10 @@
         android:name="com.example.farmer_portalnew.ui.crops"
         android:label="fragment_crops"
         tools:layout="@layout/fragment_crops" />
+    <fragment
+        android:id="@+id/setting"
+        android:name="com.example.farmer_portalnew.ui.setting"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 
 </navigation>

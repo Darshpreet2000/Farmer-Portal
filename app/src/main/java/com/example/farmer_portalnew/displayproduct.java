@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
+import com.example.farmer_portalnew.Classes.bidclass;
 import com.example.farmer_portalnew.Classes.bidding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,8 +29,6 @@ import java.util.Objects;
 
 public class displayproduct extends AppCompatActivity {
     TextView textView;
-
-    Button buyNow;
 
 
    EditText enterbiddingprice;
@@ -46,16 +45,6 @@ String farmerid,price,name,quantity;
         setContentView(R.layout.activity_displayproduct);
 
         textView=findViewById(R.id.productDescreption);
-        buyNow=findViewById(R.id.BuyNow);
-        buyNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(displayproduct.this,BuyNow.class);
-                ///put something to pass by intent
-                startActivity(intent);
-            }
-        });
-
        enterbiddingprice=findViewById(R.id.biddingprice);
        addbdidding=findViewById(R.id.addbidding);
         mAuth = FirebaseAuth.getInstance();
@@ -64,10 +53,10 @@ String farmerid,price,name,quantity;
         Intent intent=getIntent();
        final Addproduct addproduct=(Addproduct) intent.getSerializableExtra("class");
         //Log.d("msg",addproduct.getName());
-       String s="Name:"+addproduct.getCropName()+"\n";
-        s+="product type:"+addproduct.getCategory()+"\n";
-        s+="quantity:"+addproduct.getQuantity()+"\n";
-        s+="price:"+addproduct.getPrice();
+       String s="Name: "+addproduct.getCropName()+"\n"+"\n";
+        s+="Product type: "+addproduct.getCategory()+"\n"+"\n";
+        s+="Quantity: "+addproduct.getQuantity()+"\n"+"\n";
+        s+="Price: "+addproduct.getPrice();
         farmerid=addproduct.getCropOwner();
         quantity=addproduct.getQuantity();
         textView.setText(s);
@@ -81,10 +70,11 @@ String farmerid,price,name,quantity;
                    return;
                }
                price=enterbiddingprice.getText().toString();
-               bidding Bidding=new bidding(mAuth.getUid(),price,addproduct.getCropOwner(),addproduct.getCropid());
+               bidclass Bidclass=new bidclass(addproduct.getPrice(),addproduct.getCropid(),addproduct.getCropName(),addproduct.getCropOwner(),"100",price);
+              // bidding Bidding=new bidding(mAuth.getUid(),price,addproduct.getCropOwner(),addproduct.getCropid());
              //Need to change here so that price gets updated only in that crop
-               myBid=database.getReference("crops");
-               myBid.child(addproduct.getCropid()).child("bids").push().setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+               myBid=database.getReference("users");
+               myBid.child(mAuth.getUid()).child("bids").push().setValue(Bidclass).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){
@@ -96,7 +86,9 @@ String farmerid,price,name,quantity;
                    }
                });
 
-               myRef.child(Objects.requireNonNull(mAuth.getUid())).child("bids").push().setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+             String key=myRef.child(addproduct.getCropOwner()).child("bids").push().getKey();
+               bidding Bidding=new bidding(key,mAuth.getUid(),addproduct.getCropid());
+               myRef.child(addproduct.getCropOwner()).child("bids").child(key).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){
