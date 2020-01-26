@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,6 +27,9 @@ public class FarmerDetails extends AppCompatActivity {
     TextView farmerdetails;
     String s;
     ProgressBar farmerprogress;
+    ImageView callNowBtn;
+
+    String PhoneNumber ;
     private FirebaseAuth mAuth;
 
     @Override
@@ -35,10 +40,11 @@ public class FarmerDetails extends AppCompatActivity {
         farmerprogress.setVisibility(View.VISIBLE);
         bidclass current = (bidclass) getIntent().getSerializableExtra("bidclass");
         String farmerid = current.getCropOwner();
-        farmerdetails = findViewById(R.id.farmer);
+        farmerdetails = findViewById(R.id.farmerdetail);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users");
+        callNowBtn=findViewById(R.id.CallNowFarmer);
         myRef.orderByKey().equalTo(farmerid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -49,12 +55,23 @@ public class FarmerDetails extends AppCompatActivity {
                     s += "Location : " + user.getAddress();
 
                     farmerdetails.setText(s);
+                    PhoneNumber=user.getPhoneNo();
                     farmerprogress.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        callNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // int k=Integer.parseInt(PhoneNumber);
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:"+PhoneNumber));
+                startActivity(intent);
 
             }
         });
