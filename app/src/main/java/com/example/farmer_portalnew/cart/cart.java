@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.example.farmer_portalnew.Adapter.Cartadapter;
 import com.example.farmer_portalnew.Adapter.bidmycrop;
 import com.example.farmer_portalnew.Classes.Cart;
+import com.example.farmer_portalnew.PaymentMethod.creditcard;
 import com.example.farmer_portalnew.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -95,11 +98,15 @@ public class cart extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+       getMenuInflater().inflate(R.menu.cartmenu,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+       if(item.getItemId()==R.id.checkout){
+           startActivity(new Intent(cart.this, creditcard.class));
+       }
         return super.onOptionsItemSelected(item);
 
     }

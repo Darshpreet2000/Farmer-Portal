@@ -65,12 +65,12 @@ String farmerid,price,name,quantity;
            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
            @Override
            public void onClick(View v) {
-               if(enterbiddingprice.getText()==null){
+               if(enterbiddingprice.getText().toString().isEmpty()){
                   enterbiddingprice.setError("Price is required");
                    enterbiddingprice.requestFocus();
                    return;
                }
-               if(enterbiddingquantity.getText()==null){
+               if(enterbiddingquantity.getText().toString().isEmpty()){
                    enterbiddingprice.setError("Quantity is required");
                    enterbiddingprice.requestFocus();
                    return;

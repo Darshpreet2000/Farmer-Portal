@@ -136,7 +136,6 @@ public class NavigationDrawer extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         SharedPreferences shared = getSharedPreferences("USER_ICON", MODE_PRIVATE);
         String channel = (shared.getString("imagePreferance", ""));
-
         userIcon=navigationView.getHeaderView(0).findViewById(R.id.UserIcon);
 
 

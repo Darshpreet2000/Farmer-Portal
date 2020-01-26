@@ -46,8 +46,10 @@ public class displaycategorycrop extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_displaycategorycrop);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
          Intent i= getIntent();
          String category=i.getStringExtra("category");
+        getSupportActionBar().setTitle(category);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("crops");
@@ -101,7 +103,7 @@ public class displaycategorycrop extends AppCompatActivity {
                           progressBarrecycle.setVisibility(View.GONE);
                          return;
                         }
-               
+
                         current.setBuyQuantity(text.getText().toString()+" Kg");
                         cartRef.child(Objects.requireNonNull(mAuth.getUid())).child("cart").push().setValue(current).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

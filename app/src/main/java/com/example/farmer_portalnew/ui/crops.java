@@ -51,13 +51,15 @@ public class crops extends Fragment {
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Intent intent=new Intent(getActivity(),displaycategorycrop.class);
                switch(position){
-                   case 0:   intent.putExtra("category","Vegetable");startActivity(intent);
-                                break;
+                   case 0:   intent.putExtra("category","Vegetable");
+                       startActivity(intent);
+                       break;
 
                    case 1:   intent.putExtra("category","Pulses");startActivity(intent);
                        break;
 
                    case 2:   intent.putExtra("category","Fruits");startActivity(intent);
+
                        break;
 
                    case 3:   intent.putExtra("category","Spices");startActivity(intent);
