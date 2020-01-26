@@ -76,10 +76,11 @@ private List<bidclass> biddingList=new ArrayList<bidclass>();
                     biddingList.add(myBidding);
                 }
             }
-
-                myBidding Product_adapter = new myBidding(biddingList);
-                recyclerViewmybidding.setAdapter(Product_adapter);
-                recyclerViewmybidding.setHasFixedSize(true);
+                if(biddingList.size()!=0) {
+                    myBidding Product_adapter = new myBidding(biddingList);
+                    recyclerViewmybidding.setAdapter(Product_adapter);
+                    recyclerViewmybidding.setHasFixedSize(true);
+                }
                 progressBarrecyclemybidding.setVisibility(View.GONE);
             }
 

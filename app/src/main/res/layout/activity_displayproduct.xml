@@ -32,6 +32,16 @@
             android:layout_alignParentEnd="true"
             android:layout_margin="2dp"
             android:hint="Add Bidding Price" />
+        <EditText
+            android:id="@+id/biddingquantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:layout_below="@+id/productDescreption"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="2dp"
+            android:hint="Add Quantity to bid" />
 
         <Button
             android:id="@+id/addbidding"

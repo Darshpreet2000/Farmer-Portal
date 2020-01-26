@@ -67,7 +67,7 @@ public class NavigationDrawer extends AppCompatActivity {
     public static String encodeTobase64(Bitmap image) {
         Bitmap immage = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        immage.compress(Bitmap.CompressFormat.PNG, 50, baos);
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 
@@ -93,13 +93,11 @@ public class NavigationDrawer extends AppCompatActivity {
             Bitmap bitmap;
             try {
                 bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
-                SharedPreferences myPrefrence = getSharedPreferences("USER_ICON", MODE_PRIVATE);
+                bitmap= Bitmap.createScaledBitmap(bitmap, 160, 160, true);
+                SharedPreferences myPrefrence = getApplicationContext().getSharedPreferences("USER_ICON", MODE_PRIVATE);
                 SharedPreferences.Editor editor = myPrefrence.edit();
                 editor.putString("imagePreferance", encodeTobase64(bitmap));
                 editor.commit();
-                SharedPreferences shared = getSharedPreferences("USER_ICON", MODE_PRIVATE);
-                String channel = (shared.getString("imagePreferance", ""));
-               bitmap= decodeBase64(channel);
                 userIcon=findViewById(R.id.UserIcon);
                 userIcon.setImageBitmap(bitmap);
             } catch (FileNotFoundException e) {
@@ -142,16 +140,13 @@ public class NavigationDrawer extends AppCompatActivity {
         userIcon=navigationView.getHeaderView(0).findViewById(R.id.UserIcon);
 
 
-          if(!channel.isEmpty()) {
+          if(!channel.isEmpty()&&userIcon.getDrawable().getConstantState().equals
+                (getResources().getDrawable(R.drawable.user_image).getConstantState())) {
               //Toast.makeText(this, "inside null"+channel, Toast.LENGTH_SHORT).show();
               Bitmap bitmap= decodeBase64(channel);
              userIcon.setImageBitmap(bitmap);
           }
        // userIcon.setImageBitmap(bitmap);
-
-
-
-
 
     }
 
