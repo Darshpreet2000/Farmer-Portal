@@ -19,13 +19,21 @@
             android:layout_height="wrap_content"
             android:text="Product Name" />
 
-
         <TextView
-            android:id="@+id/productquantity1"
             android:layout_below="@id/producttitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Offer Quantity" />
+        <TextView
+            android:id="@+id/productquantity1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/producttitle1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="151dp"
+            android:layout_marginTop="1dp"
             android:text="Quantity" />
+
         <TextView
             android:layout_margin="10dp"
             android:layout_below="@id/productquantity1"

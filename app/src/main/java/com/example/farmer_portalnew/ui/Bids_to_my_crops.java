@@ -74,30 +74,33 @@ public class Bids_to_my_crops extends Fragment {
                 //    productref = database.getReference("crops/"+cropid);
 
                 }
-                final String finalBuyerid = buyerid;
-                productref.child(buyerid).child("bids").orderByKey().equalTo(bidid).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot datavalues:dataSnapshot.getChildren()){
-                            farmerclass addproduct=datavalues.getValue(farmerclass.class);
-                            addproduct.setBuyerid(finalBuyerid);
-                            biddingList.add(addproduct);
+                if(buyerid!=null&&bidid!=null) {
+                    final String finalBuyerid = buyerid;
+                    productref.child(buyerid).child("bids").orderByKey().equalTo(bidid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot datavalues : dataSnapshot.getChildren()) {
+
+                                farmerclass addproduct = datavalues.getValue(farmerclass.class);
+                                addproduct.setBuyerid(finalBuyerid);
+                                biddingList.add(addproduct);
+                            }
+
+
+                            recyclerViewbidmycrop.setLayoutManager(new LinearLayoutManager(getContext()));
+                            bidmycrop Product_adapter = new bidmycrop(biddingList);
+                            recyclerViewbidmycrop.setAdapter(Product_adapter);
+                            recyclerViewbidmycrop.setHasFixedSize(true);
+                            progressBarrecyclebidmycrop.setVisibility(View.GONE);
                         }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        recyclerViewbidmycrop.setLayoutManager(new LinearLayoutManager(getContext()));
-                        bidmycrop Product_adapter=new bidmycrop( biddingList);
-                        recyclerViewbidmycrop.setAdapter(Product_adapter);
-                        recyclerViewbidmycrop.setHasFixedSize(true);
-                        progressBarrecyclebidmycrop.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
+                        }
+                    });
+                }
+                progressBarrecyclebidmycrop.setVisibility(View.GONE);
             }
 
             @Override

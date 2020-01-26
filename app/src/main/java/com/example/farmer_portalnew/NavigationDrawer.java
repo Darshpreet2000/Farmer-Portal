@@ -2,6 +2,10 @@ package com.example.farmer_portalnew;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.farmer_portalnew.Classes.User;
@@ -10,10 +14,15 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import android.provider.MediaStore;
+import android.provider.Settings;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -35,6 +44,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+
 public class NavigationDrawer extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -43,12 +55,58 @@ public class NavigationDrawer extends AppCompatActivity {
     private User user;
     private FirebaseAuth mAuth;
     private  NavigationView navigationView;
+    private static final int CAMERA_REQUEST = 0;
+    private static final int IMAGE_PICK = 1;
     ImageView userIcon;
-    public  void userprofiler(View view){
-        
-        Toast.makeText(this, "tapped", Toast.LENGTH_SHORT).show();
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    public static Bitmap decodeBase64(String input) {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory
+                .decodeByteArray(decodedByte, 0, decodedByte.length);
     }
+    public static String encodeTobase64(Bitmap image) {
+        Bitmap immage = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immage.compress(Bitmap.CompressFormat.PNG, 50, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        Log.d("Image Log:", imageEncoded);
+        return imageEncoded;
+    }
+    public  void userprofilIcon(View view){
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, IMAGE_PICK);
+
+       /* Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }*/
+
+    }
+
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Uri targetUri = data.getData();
+
+            Bitmap bitmap;
+            try {
+                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                bitmap= Bitmap.createScaledBitmap(bitmap, 160, 160, true);
+                SharedPreferences myPrefrence = getApplicationContext().getSharedPreferences("USER_ICON", MODE_PRIVATE);
+                SharedPreferences.Editor editor = myPrefrence.edit();
+                editor.putString("imagePreferance", encodeTobase64(bitmap));
+                editor.commit();
+                userIcon=findViewById(R.id.UserIcon);
+                userIcon.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                // TODO Auto-generated catch block
+                Toast.makeText(this, "something went wrong", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        }
+    }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_drawer);
@@ -56,6 +114,8 @@ public class NavigationDrawer extends AppCompatActivity {
         setSupportActionBar(toolbar);
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
+
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
@@ -74,6 +134,18 @@ public class NavigationDrawer extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        SharedPreferences shared = getSharedPreferences("USER_ICON", MODE_PRIVATE);
+        String channel = (shared.getString("imagePreferance", ""));
+        userIcon=navigationView.getHeaderView(0).findViewById(R.id.UserIcon);
+
+
+          if(!channel.isEmpty()&&userIcon.getDrawable().getConstantState().equals
+                (getResources().getDrawable(R.drawable.user_image).getConstantState())) {
+              //Toast.makeText(this, "inside null"+channel, Toast.LENGTH_SHORT).show();
+              Bitmap bitmap= decodeBase64(channel);
+             userIcon.setImageBitmap(bitmap);
+          }
+       // userIcon.setImageBitmap(bitmap);
 
     }
 
