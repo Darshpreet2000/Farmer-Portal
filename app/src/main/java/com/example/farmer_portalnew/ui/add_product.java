@@ -146,7 +146,10 @@ public class add_product extends Fragment {
              }
 
          else{
-             if(spinneritem!="Choose a Category") {
+             if(spinneritem!="Choose a Category"&&!s.isEmpty()&&!productname.isEmpty()&&!productquantity.isEmpty()
+                    &&!minq.isEmpty()) {
+
+
                  final crops crop=new crops();
                  String farmerid = mAuth.getUid();
 
