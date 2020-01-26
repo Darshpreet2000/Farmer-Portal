@@ -31,7 +31,7 @@ public class displayproduct extends AppCompatActivity {
     TextView textView;
 
 
-   EditText enterbiddingprice;
+   EditText enterbiddingprice,enterbiddingquantity;
    Button addbdidding;
     DatabaseReference myRef;
     DatabaseReference myBid;
@@ -43,7 +43,7 @@ String farmerid,price,name,quantity;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_displayproduct);
-
+        enterbiddingquantity=findViewById(R.id.biddingquantity);
         textView=findViewById(R.id.productDescreption);
        enterbiddingprice=findViewById(R.id.biddingprice);
        addbdidding=findViewById(R.id.addbidding);
@@ -69,8 +69,13 @@ String farmerid,price,name,quantity;
                    enterbiddingprice.requestFocus();
                    return;
                }
+               if(enterbiddingquantity.getText()==null){
+                   enterbiddingprice.setError("Quantity is required");
+                   enterbiddingprice.requestFocus();
+                   return;
+               }
                price=enterbiddingprice.getText().toString();
-               bidclass Bidclass=new bidclass(addproduct.getPrice(),addproduct.getCropid(),addproduct.getCropName(),addproduct.getCropOwner(),"100",price);
+               bidclass Bidclass=new bidclass(addproduct.getPrice(),addproduct.getCropid(),addproduct.getCropName(),addproduct.getCropOwner(),enterbiddingquantity.getText().toString(),price);
               // bidding Bidding=new bidding(mAuth.getUid(),price,addproduct.getCropOwner(),addproduct.getCropid());
              //Need to change here so that price gets updated only in that crop
                myBid=database.getReference("users");
