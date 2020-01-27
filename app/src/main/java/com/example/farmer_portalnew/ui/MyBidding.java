@@ -71,14 +71,16 @@ private List<bidclass> biddingList=new ArrayList<bidclass>();
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataValues : dataSnapshot.getChildren()) {
-
-                  bidclass myBidding = dataValues.getValue(bidclass.class);
+                if(!dataValues.hasChild("bidId")) {
+                    bidclass myBidding = dataValues.getValue(bidclass.class);
                     biddingList.add(myBidding);
                 }
-
-                myBidding Product_adapter = new myBidding(biddingList);
-                recyclerViewmybidding.setAdapter(Product_adapter);
-                recyclerViewmybidding.setHasFixedSize(true);
+            }
+                if(biddingList.size()!=0) {
+                    myBidding Product_adapter = new myBidding(biddingList);
+                    recyclerViewmybidding.setAdapter(Product_adapter);
+                    recyclerViewmybidding.setHasFixedSize(true);
+                }
                 progressBarrecyclemybidding.setVisibility(View.GONE);
             }
 

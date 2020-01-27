@@ -99,6 +99,7 @@ public class add_product extends Fragment {
       arrayList.add("Pulses");
       arrayList.add("Fruits");
       arrayList.add("Spices");
+      arrayList.add("Beverages");
       arrayList.add("Dry Fruits");
       arrayList.add("Other");
       ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, arrayList){
@@ -145,7 +146,10 @@ public class add_product extends Fragment {
              }
 
          else{
-             if(spinneritem!="Choose a Category") {
+             if(spinneritem!="Choose a Category"&&!s.isEmpty()&&!productname.isEmpty()&&!productquantity.isEmpty()
+                    &&!minq.isEmpty()) {
+
+
                  final crops crop=new crops();
                  String farmerid = mAuth.getUid();
 

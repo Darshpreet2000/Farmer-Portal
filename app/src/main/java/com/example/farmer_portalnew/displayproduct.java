@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
+import com.example.farmer_portalnew.Classes.Cart;
 import com.example.farmer_portalnew.Classes.bidclass;
 import com.example.farmer_portalnew.Classes.bidding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,7 +32,7 @@ public class displayproduct extends AppCompatActivity {
     TextView textView;
 
 
-   EditText enterbiddingprice;
+   EditText enterbiddingprice,enterbiddingquantity;
    Button addbdidding;
     DatabaseReference myRef;
     DatabaseReference myBid;
@@ -43,7 +44,7 @@ String farmerid,price,name,quantity;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_displayproduct);
-
+        enterbiddingquantity=findViewById(R.id.biddingquantity);
         textView=findViewById(R.id.productDescreption);
        enterbiddingprice=findViewById(R.id.biddingprice);
        addbdidding=findViewById(R.id.addbidding);
@@ -51,7 +52,7 @@ String farmerid,price,name,quantity;
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users");
         Intent intent=getIntent();
-       final Addproduct addproduct=(Addproduct) intent.getSerializableExtra("class");
+       final Cart addproduct=(Cart) intent.getSerializableExtra("class");
         //Log.d("msg",addproduct.getName());
        String s="Name: "+addproduct.getCropName()+"\n"+"\n";
         s+="Product type: "+addproduct.getCategory()+"\n"+"\n";
@@ -64,17 +65,23 @@ String farmerid,price,name,quantity;
            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
            @Override
            public void onClick(View v) {
-               if(enterbiddingprice.getText()==null){
+               if(enterbiddingprice.getText().toString().isEmpty()){
                   enterbiddingprice.setError("Price is required");
                    enterbiddingprice.requestFocus();
                    return;
                }
+               if(enterbiddingquantity.getText().toString().isEmpty()){
+                   enterbiddingprice.setError("Quantity is required");
+                   enterbiddingprice.requestFocus();
+                   return;
+               }
                price=enterbiddingprice.getText().toString();
-               bidclass Bidclass=new bidclass(addproduct.getPrice(),addproduct.getCropid(),addproduct.getCropName(),addproduct.getCropOwner(),"100",price);
+               bidclass Bidclass=new bidclass(addproduct.getPrice(),addproduct.getCropid(),addproduct.getCropName(),addproduct.getCropOwner(),enterbiddingquantity.getText().toString(),price);
               // bidding Bidding=new bidding(mAuth.getUid(),price,addproduct.getCropOwner(),addproduct.getCropid());
              //Need to change here so that price gets updated only in that crop
                myBid=database.getReference("users");
-               myBid.child(mAuth.getUid()).child("bids").push().setValue(Bidclass).addOnCompleteListener(new OnCompleteListener<Void>() {
+               String key=myBid.child(mAuth.getUid()).child("bids").push().getKey();
+               myBid.child(mAuth.getUid()).child("bids").child(key).setValue(Bidclass).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){
@@ -86,9 +93,8 @@ String farmerid,price,name,quantity;
                    }
                });
 
-             String key=myRef.child(addproduct.getCropOwner()).child("bids").push().getKey();
                bidding Bidding=new bidding(key,mAuth.getUid(),addproduct.getCropid());
-               myRef.child(addproduct.getCropOwner()).child("bids").child(key).setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
+               myRef.child(addproduct.getCropOwner()).child("bids").push().setValue(Bidding).addOnCompleteListener(new OnCompleteListener<Void>() {
                    @Override
                    public void onComplete(@NonNull Task<Void> task) {
                        if(task.isSuccessful()){

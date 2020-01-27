@@ -8,42 +8,42 @@
     <fragment
         android:id="@+id/AddProduct"
         android:name="com.example.farmer_portalnew.ui.add_product"
-        android:label="fragment_add_product"
+        android:label="Add Product"
         tools:layout="@layout/fragment_add_product" />
     <fragment
         android:id="@+id/Payment"
         android:name="com.example.farmer_portalnew.ui.payments"
-        android:label="fragment_payments"
+        android:label="Payments"
         tools:layout="@layout/fragment_payments" />
     <fragment
         android:id="@+id/Transport"
         android:name="com.example.farmer_portalnew.ui.transport"
-        android:label="fragment_transport"
+        android:label="Transport"
         tools:layout="@layout/fragment_transport" />
     <fragment
         android:id="@+id/my_Products"
         android:name="com.example.farmer_portalnew.ui.My_Products"
-        android:label="fragment_my__products"
+        android:label="My Products"
         tools:layout="@layout/fragment_my__products" />
     <fragment
         android:id="@+id/bidding"
         android:name="com.example.farmer_portalnew.ui.MyBidding"
-        android:label="fragment_my_bidding"
+        android:label="My Bidding"
         tools:layout="@layout/fragment_my_bidding" />
     <fragment
         android:id="@+id/bidmycrop"
         android:name="com.example.farmer_portalnew.ui.Bids_to_my_crops"
-        android:label="fragment_bids_to_my_crops"
+        android:label="Bids To My Crops"
         tools:layout="@layout/fragment_bids_to_my_crops" />
     <fragment
         android:id="@+id/crops"
         android:name="com.example.farmer_portalnew.ui.crops"
-        android:label="fragment_crops"
+        android:label="Crops"
         tools:layout="@layout/fragment_crops" />
     <fragment
         android:id="@+id/setting"
         android:name="com.example.farmer_portalnew.ui.setting"
-        android:label="fragment_setting"
+        android:label="Settings"
         tools:layout="@layout/fragment_setting" />
 
 </navigation>

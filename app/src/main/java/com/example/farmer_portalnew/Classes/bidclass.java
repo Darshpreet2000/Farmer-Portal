@@ -1,6 +1,8 @@
 package com.example.farmer_portalnew.Classes;
 
-public class bidclass {
+import java.io.Serializable;
+
+public class bidclass implements Serializable {
     String  actualPrice,cropId,cropName,cropOwner,offerQuantity,offerPrice;
 
 

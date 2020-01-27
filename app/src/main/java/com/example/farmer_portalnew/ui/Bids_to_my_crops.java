@@ -17,10 +17,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.farmer_portalnew.Adapter.bidmycrop;
-import com.example.farmer_portalnew.Adapter.myBidding;
-import com.example.farmer_portalnew.Adapter.myProduct_adapter;
-import com.example.farmer_portalnew.Classes.Addproduct;
 import com.example.farmer_portalnew.Classes.bidding;
+import com.example.farmer_portalnew.Classes.farmerclass;
 import com.example.farmer_portalnew.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,7 +39,7 @@ public class Bids_to_my_crops extends Fragment {
     ProgressBar progressBarrecyclebidmycrop;
     RecyclerView recyclerViewbidmycrop;
 
-    private List<bidding> biddingList=new ArrayList<bidding>();
+    private List<farmerclass> biddingList=new ArrayList<farmerclass>();
     public Bids_to_my_crops() {
         // Required empty public constructor
 
@@ -56,25 +54,52 @@ public class Bids_to_my_crops extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users");
+        productref = database.getReference("users");
         progressBarrecyclebidmycrop = (ProgressBar) view.findViewById(R.id.progressBarbidmycrop);
         progressBarrecyclebidmycrop.setVisibility(View.VISIBLE);
         recyclerViewbidmycrop = view.findViewById(R.id.recycleviewbidmycrop);
         recyclerViewbidmycrop.setLayoutManager(new LinearLayoutManager(getContext()));
+
         myRef.child(Objects.requireNonNull(mAuth.getUid())).child("bids").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String bidid = null;
+                String buyerid = null;
                 for(DataSnapshot dataValues:dataSnapshot.getChildren()){
-                    bidding mybidding=dataValues.getValue(bidding.class);
-               //     String cropid=mybidding.getCropid();
-                  biddingList.add(mybidding);
+                    if(!dataValues.hasChild("actualPrice")) {
+                        bidding mybidding = dataValues.getValue(bidding.class);
+                            bidid=mybidding.getBidId();
+                             buyerid=mybidding.getBuyerId();
+                    }
                 //    productref = database.getReference("crops/"+cropid);
 
                 }
+                if(buyerid!=null&&bidid!=null) {
+                    final String finalBuyerid = buyerid;
+                    productref.child(buyerid).child("bids").orderByKey().equalTo(bidid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot datavalues : dataSnapshot.getChildren()) {
 
-                recyclerViewbidmycrop.setLayoutManager(new LinearLayoutManager(getContext()));
-                bidmycrop Product_adapter=new bidmycrop( biddingList);
-                recyclerViewbidmycrop.setAdapter(Product_adapter);
-                recyclerViewbidmycrop.setHasFixedSize(true);
+                                farmerclass addproduct = datavalues.getValue(farmerclass.class);
+                                addproduct.setBuyerid(finalBuyerid);
+                                biddingList.add(addproduct);
+                            }
+
+
+                            recyclerViewbidmycrop.setLayoutManager(new LinearLayoutManager(getContext()));
+                            bidmycrop Product_adapter = new bidmycrop(biddingList);
+                            recyclerViewbidmycrop.setAdapter(Product_adapter);
+                            recyclerViewbidmycrop.setHasFixedSize(true);
+                            progressBarrecyclebidmycrop.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
                 progressBarrecyclebidmycrop.setVisibility(View.GONE);
             }
 

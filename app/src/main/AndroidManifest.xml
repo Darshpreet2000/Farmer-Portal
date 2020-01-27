@@ -6,6 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
 
     <application
         android:allowBackup="true"
@@ -14,20 +17,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".cart.cart"
-            android:label="Cart"></activity>
-        <activity android:name=".ui.displaycategorycrop" />
+        <activity android:name=".biddingview.BuyerDetails"
+            android:label="Buyer Details"></activity>
+        <activity android:name=".biddingview.FarmerDetails"
+            android:label="Farmer Details"/>
+        <activity
+            android:name=".cart.cart"
+            android:label="My Cart" />
+        <activity android:name=".ui.displaycategorycrop"
+            android:parentActivityName=".NavigationDrawer"/>
         <activity android:name=".DisplayTransportDetail" />
         <activity android:name=".TransportFacilty" />
         <activity android:name=".PaymentMethod.creditcard" />
-        <activity android:name=".UpdateYourCrop" />
+        <activity android:name=".UpdateYourCrop"
+            android:label="Update Crop"/>
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
             android:configChanges="keyboardHidden|orientation|keyboard"
             android:screenOrientation="portrait" />
-        <activity android:name=".PaymentMethod.Cash" />
-        <activity android:name=".PaymentMethod.PaymentsMethod" />
-        <activity android:name=".BuyNow" />
         <activity android:name=".MyProductActivity" />
         <activity android:name=".displayproduct" />
         <activity

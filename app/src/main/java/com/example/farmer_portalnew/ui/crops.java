@@ -42,6 +42,7 @@ public class crops extends Fragment {
         CropCategory.add("Fruits");
         CropCategory.add("Spices");
         CropCategory.add("Dry Fruits");
+        CropCategory.add("Beverages");
         CropCategory.add("Others");
         cropslist.setAdapter(new ArrayAdapter<String>(getContext(), R.layout.croplistitem,R.id.categorytitle,CropCategory));
 
@@ -50,13 +51,15 @@ public class crops extends Fragment {
            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Intent intent=new Intent(getActivity(),displaycategorycrop.class);
                switch(position){
-                   case 0:   intent.putExtra("category","Vegetable");startActivity(intent);
-                                break;
+                   case 0:   intent.putExtra("category","Vegetable");
+                       startActivity(intent);
+                       break;
 
                    case 1:   intent.putExtra("category","Pulses");startActivity(intent);
                        break;
 
                    case 2:   intent.putExtra("category","Fruits");startActivity(intent);
+
                        break;
 
                    case 3:   intent.putExtra("category","Spices");startActivity(intent);
@@ -64,8 +67,11 @@ public class crops extends Fragment {
 
                    case 4:   intent.putExtra("category","Dry Fruits");startActivity(intent);
                        break;
-                   case 5:   intent.putExtra("category","Others");startActivity(intent);
+                   case 5:   intent.putExtra("category","Beverages");startActivity(intent);
                              break;
+
+                   case 6:   intent.putExtra("category","Others");startActivity(intent);
+                       break;
 
                }
            }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:padding="8dp">
+
+
+        <TextView
+            android:layout_alignParentStart="true"
+            android:id="@+id/producttitle1"
+            android:layout_width="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_height="wrap_content"
+            android:text="Product Name" />
+
+        <TextView
+            android:layout_below="@id/producttitle1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offer Quantity" />
+        <TextView
+            android:id="@+id/productquantity1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/producttitle1"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="151dp"
+            android:layout_marginTop="1dp"
+            android:text="Quantity" />
+
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_below="@id/productquantity1"
+            android:layout_width="wrap_content"
+            android:id="@+id/originalprice"
+            android:layout_height="wrap_content"
+            android:text="Original Price"/>
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/PriceOfCrop1"
+            android:layout_below="@id/productquantity1"
+            android:layout_toRightOf="@id/originalprice"
+            android:text="CropPrice"/>
+
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_below="@id/originalprice"
+            android:layout_width="wrap_content"
+            android:id="@+id/bidprice"
+            android:layout_height="wrap_content"
+            android:text="Bid Price"/>
+        <TextView
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Bidprice"
+            android:layout_toRightOf="@id/bidprice"
+            android:layout_below="@id/PriceOfCrop1"
+            android:text="BidPrice"/>
+        <LinearLayout
+            android:layout_below="@id/Bidprice"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/buyerdetails"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="9dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/primary"
+            android:text="View Buyer Details"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
