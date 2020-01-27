@@ -144,7 +144,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
 
         final String area = editTextArea.getText().toString().trim();
-        if(RegisteredAs=="Register As"){
+     /*   if(RegisteredAs=="Register As"){
             Toast.makeText(this, "Please Select Register As", Toast.LENGTH_SHORT).show();
 
         }
@@ -153,7 +153,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
 
         }
-
+*/
       if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
             editTextEmail.requestFocus();
@@ -198,6 +198,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
            // finish();
             startActivity(intent);
+        }
+        else{
+            Toast.makeText(this, "Please select Register as and language", Toast.LENGTH_SHORT).show();
         }
 
     }
