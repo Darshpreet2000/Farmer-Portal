@@ -75,6 +75,27 @@ String farmerid,price,name,quantity;
                    enterbiddingprice.requestFocus();
                    return;
                }
+              String minquantity=addproduct.getMinQuantity();
+               String maxquantity=addproduct.getQuantity();
+               int i;
+               for(i=0;i<minquantity.length();i++){
+                   if(minquantity.charAt(i)==' '){
+                       break;
+                   }
+               }
+               minquantity=minquantity.substring(0,i);
+               for(i=0;i<maxquantity.length();i++){
+                   if(maxquantity.charAt(i)==' '){
+                       break;
+                   }
+               }
+               maxquantity=maxquantity.substring(0,i);
+               if(Integer.parseInt(enterbiddingquantity.getText().toString())<Integer.parseInt(minquantity)||
+                       Integer.parseInt(enterbiddingquantity.getText().toString())>Integer.parseInt(maxquantity)){
+                   enterbiddingquantity.setError("This must be between "+minquantity+" and "+maxquantity);
+                   enterbiddingquantity.requestFocus();
+                   return;
+               }
                price=enterbiddingprice.getText().toString();
                bidclass Bidclass=new bidclass(addproduct.getPrice(),addproduct.getCropid(),addproduct.getCropName(),addproduct.getCropOwner(),enterbiddingquantity.getText().toString(),price);
               // bidding Bidding=new bidding(mAuth.getUid(),price,addproduct.getCropOwner(),addproduct.getCropid());
@@ -105,10 +126,7 @@ String farmerid,price,name,quantity;
                        }
                    }
                });
-
-
            }
        });
     }
-
 }
