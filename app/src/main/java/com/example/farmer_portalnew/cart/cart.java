@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.farmer_portalnew.Adapter.Cartadapter;
 import com.example.farmer_portalnew.Adapter.bidmycrop;
 import com.example.farmer_portalnew.Classes.Cart;
+import com.example.farmer_portalnew.Classes.Originalcart;
 import com.example.farmer_portalnew.PaymentMethod.creditcard;
 import com.example.farmer_portalnew.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,7 +42,7 @@ public class cart extends AppCompatActivity {
     DatabaseReference myRef,search;
     FirebaseDatabase database;
     private FirebaseAuth mAuth;
-    private List<Cart> mycartList = new ArrayList<Cart>();
+    private List<Originalcart> mycartList = new ArrayList<>();
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,24 +50,26 @@ public class cart extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("users");
-        search = database.getReference("users");
+        myRef = database.getReference("cart");
+        search = database.getReference("cart");
         progressBarrecyclemycart=findViewById(R.id.progressBarmycart);
         recyclerViewmycart=findViewById(R.id.recycleviewmycart);
         progressBarrecyclemycart.setVisibility(View.VISIBLE);
         recyclerViewmycart.setLayoutManager(new LinearLayoutManager(getContext()));
-        myRef.child(Objects.requireNonNull(mAuth.getUid())).child("cart").addValueEventListener(new ValueEventListener() {
+        myRef.orderByChild("buyerId").equalTo(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot datavalues:dataSnapshot.getChildren()){
-                    Cart cart=datavalues.getValue(Cart.class);
+                    Originalcart cart=datavalues.getValue(Originalcart.class);
+                     String key= datavalues.getKey();
+                    cart.setMykey(key);
                     mycartList.add(cart);
                 }
                 final Cartadapter Product_adapter = new Cartadapter(mycartList, new Cartadapter.OnItemClicked() {
                     @Override
                     public void onbuttonclicked(final int position) {
                          progressBarrecyclemycart.setVisibility(View.VISIBLE);
-                         search.child(mAuth.getUid()).child("cart").orderByChild("cropid").equalTo(mycartList.get(position).getCropid()).addValueEventListener(new ValueEventListener() {
+                         search.child(mycartList.get(position).getMykey()).addValueEventListener(new ValueEventListener() {
                              @Override
                              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                  dataSnapshot.getRef().removeValue();
