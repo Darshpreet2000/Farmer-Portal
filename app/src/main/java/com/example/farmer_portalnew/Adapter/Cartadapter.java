@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
 import com.example.farmer_portalnew.Classes.Cart;
+import com.example.farmer_portalnew.Classes.Originalcart;
 import com.example.farmer_portalnew.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Cartadapter  extends RecyclerView.Adapter<Cartadapter.mycartholder> {
-    private List<Cart> cartlist=new ArrayList<>();
+    private List<Originalcart> cartlist=new ArrayList<>();
     private Cartadapter.OnItemClicked onClick;
 
-    public Cartadapter(List<Cart> cartlist, Cartadapter.OnItemClicked onClick) {
+    public Cartadapter(List<Originalcart> cartlist, Cartadapter.OnItemClicked onClick) {
         this.cartlist = cartlist;
         this.onClick = onClick;
     }
@@ -41,10 +42,10 @@ public class Cartadapter  extends RecyclerView.Adapter<Cartadapter.mycartholder>
 
     @Override
     public void onBindViewHolder(@NonNull mycartholder holder, int position) {
-        final Cart currentnote=cartlist.get(position);
+        final Originalcart currentnote=cartlist.get(position);
         holder.title.setText(currentnote.getCropName());
         holder.category.setText(currentnote.getCategory());
-        holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
+        holder.quantity.setText(String.valueOf(currentnote.getAvailableQuantity()));
         holder.cropprice.setText(String.valueOf(currentnote.getPrice())+" Rupees");
         holder.buyingquantity.setText(String.valueOf(currentnote.getBuyQuantity()));
     }

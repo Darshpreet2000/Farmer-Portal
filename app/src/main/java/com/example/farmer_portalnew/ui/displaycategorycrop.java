@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.farmer_portalnew.Adapter.product_adapter;
 import com.example.farmer_portalnew.Classes.Cart;
+import com.example.farmer_portalnew.Classes.Originalcart;
 import com.example.farmer_portalnew.R;
 import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -53,7 +54,7 @@ public class displaycategorycrop extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("crops");
-        cartRef=database.getReference("users");
+        cartRef=database.getReference("cart");
         progressBarrecycle=(ProgressBar) findViewById(R.id.progressBarrecycle);
         progressBarrecycle.setVisibility(View.VISIBLE);
         recyclerView=findViewById(R.id.recycleview);
@@ -127,7 +128,8 @@ public class displaycategorycrop extends AppCompatActivity {
                             return;
                         }
                         current.setBuyQuantity(text.getText().toString()+" Kg");
-                        cartRef.child(Objects.requireNonNull(mAuth.getUid())).child("cart").push().setValue(current).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        Originalcart originalcart=new Originalcart(mAuth.getUid(),current.getCropid(),current.getCropName(),current.getCropOwner(),current.getPrice(),"false",current.getCategory(),current.getBuyQuantity(),current.getQuantity());
+                        cartRef.push().setValue(originalcart).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(displaycategorycrop.this, "Item Added Successfully", Toast.LENGTH_SHORT).show();
