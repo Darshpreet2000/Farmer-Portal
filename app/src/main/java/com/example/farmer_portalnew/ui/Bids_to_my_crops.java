@@ -71,8 +71,6 @@ public class Bids_to_my_crops extends Fragment {
                             bidid=mybidding.getBidId();
                              buyerid=mybidding.getBuyerId();
                     }
-                //    productref = database.getReference("crops/"+cropid);
-
                 }
                 if(buyerid!=null&&bidid!=null) {
                     final String finalBuyerid = buyerid;
@@ -85,7 +83,6 @@ public class Bids_to_my_crops extends Fragment {
                                 addproduct.setBuyerid(finalBuyerid);
                                 biddingList.add(addproduct);
                             }
-
 
                             recyclerViewbidmycrop.setLayoutManager(new LinearLayoutManager(getContext()));
                             bidmycrop Product_adapter = new bidmycrop(biddingList);

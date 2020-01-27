@@ -103,7 +103,29 @@ public class displaycategorycrop extends AppCompatActivity {
                           progressBarrecycle.setVisibility(View.GONE);
                          return;
                         }
+                        String buyQuantity=productList.get(position).getMinQuantity();
+                        String available=productList.get(position).getQuantity();
+                        int i;
+                        for(i=0;i<buyQuantity.length();i++){
+                         if(buyQuantity.charAt(i)==' '){
+                             break;
+                          }
+                        }
+                        buyQuantity=buyQuantity.substring(0,i);
+                        for(i=0;i<available.length();i++){
+                            if(available.charAt(i)==' '){
+                                break;
+                            }
+                        }
 
+                        available=available.substring(0,i);
+                        if(Integer.parseInt(text.getText().toString())<Integer.parseInt(buyQuantity)||
+                                Integer.parseInt(text.getText().toString())>Integer.parseInt(available)){
+                            text.setError("This must be between "+buyQuantity+" and "+available);
+                            text.requestFocus();
+                            progressBarrecycle.setVisibility(View.GONE);
+                            return;
+                        }
                         current.setBuyQuantity(text.getText().toString()+" Kg");
                         cartRef.child(Objects.requireNonNull(mAuth.getUid())).child("cart").push().setValue(current).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
