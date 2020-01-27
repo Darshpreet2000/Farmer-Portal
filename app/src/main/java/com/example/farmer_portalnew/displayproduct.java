@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
+import com.example.farmer_portalnew.Classes.Cart;
 import com.example.farmer_portalnew.Classes.bidclass;
 import com.example.farmer_portalnew.Classes.bidding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -51,7 +52,7 @@ String farmerid,price,name,quantity;
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("users");
         Intent intent=getIntent();
-       final Addproduct addproduct=(Addproduct) intent.getSerializableExtra("class");
+       final Cart addproduct=(Cart) intent.getSerializableExtra("class");
         //Log.d("msg",addproduct.getName());
        String s="Name: "+addproduct.getCropName()+"\n"+"\n";
         s+="Product type: "+addproduct.getCategory()+"\n"+"\n";
@@ -64,12 +65,12 @@ String farmerid,price,name,quantity;
            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
            @Override
            public void onClick(View v) {
-               if(enterbiddingprice.getText()==null){
+               if(enterbiddingprice.getText().toString().isEmpty()){
                   enterbiddingprice.setError("Price is required");
                    enterbiddingprice.requestFocus();
                    return;
                }
-               if(enterbiddingquantity.getText()==null){
+               if(enterbiddingquantity.getText().toString().isEmpty()){
                    enterbiddingprice.setError("Quantity is required");
                    enterbiddingprice.requestFocus();
                    return;

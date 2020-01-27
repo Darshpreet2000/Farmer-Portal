@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.farmer_portalnew.Classes.Addproduct;
+import com.example.farmer_portalnew.Classes.Cart;
 import com.example.farmer_portalnew.displayproduct;
 import com.example.farmer_portalnew.R;
 
@@ -23,14 +25,14 @@ import java.util.List;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class product_adapter extends RecyclerView.Adapter<product_adapter.Productholder> {
-    public product_adapter(List<Addproduct> product) {
+    public product_adapter(List<Cart> product) {
         this.product = product;
     }
 
-    private List<Addproduct> product=new ArrayList<>();
+    private List<Cart> product=new ArrayList<>();
     private OnItemClicked onClick;
 
-    public product_adapter(List<Addproduct> product, OnItemClicked onClick) {
+    public product_adapter(List<Cart> product, OnItemClicked onClick) {
         this.product = product;
         this.onClick = onClick;
     }
@@ -52,7 +54,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull Productholder holder, int position) {
-        final Addproduct currentnote=product.get(position);
+        final Cart currentnote=product.get(position);
         holder.title.setText(currentnote.getCropName());
         holder.category.setText(currentnote.getCategory());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
@@ -73,7 +75,6 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
 
 
     }
-
     @Override
     public int getItemCount() {
         return product.size();
@@ -85,6 +86,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
         private TextView quantity;
         private  TextView minquantity;
         private  TextView CropPrice;
+        private EditText Enteramounttobuy;
       private Button Buttoncart,bidprice;
         public Productholder(@NonNull View itemView) {
             super(itemView);
@@ -97,6 +99,7 @@ public class product_adapter extends RecyclerView.Adapter<product_adapter.Produc
            Buttoncart.setOnClickListener(this);
            bidprice=itemView.findViewById(R.id.buttonbidprice);
            bidprice.setOnClickListener(this);
+          Enteramounttobuy=itemView.findViewById(R.id.amountobuy);
         }
 
         @Override

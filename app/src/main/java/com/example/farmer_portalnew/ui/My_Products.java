@@ -75,6 +75,7 @@ public class My_Products extends Fragment {
                 recyclerViewmy.setAdapter(Product_adapter);
                 recyclerViewmy.setHasFixedSize(true);
                 progressBarrecyclemy.setVisibility(View.GONE);
+                Toast.makeText(getContext(), "Click on Product to Update", Toast.LENGTH_SHORT).show();
             }
 
             @Override

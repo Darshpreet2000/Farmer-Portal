@@ -1,5 +1,6 @@
 package com.example.farmer_portalnew.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -33,7 +34,7 @@ public class myProduct_adapter extends RecyclerView.Adapter<myProduct_adapter.my
     @Override
     public myProduct_adapter.myProductholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemview= LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.product_items,parent,false);
+                .inflate(R.layout.myproductsitem,parent,false);
         return new myProduct_adapter.myProductholder(itemview);
     }
 
@@ -43,10 +44,12 @@ public class myProduct_adapter extends RecyclerView.Adapter<myProduct_adapter.my
         holder.title.setText(currentnote.getCropName());
         holder.category.setText(currentnote.getCategory());
         holder.quantity.setText(String.valueOf(currentnote.getQuantity()));
+        holder.CropPrice.setText(String.valueOf(currentnote.getPrice())+" Rupees");
+        holder.minquantity.setText(String.valueOf(currentnote.getMinQuantity()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = getApplicationContext();
+                @SuppressLint("RestrictedApi") Context context = getApplicationContext();
 
                 Intent intent = new Intent(context, MyProductActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -69,8 +72,13 @@ public class myProduct_adapter extends RecyclerView.Adapter<myProduct_adapter.my
         private TextView category;
         private TextView quantity;
 
+        private  TextView minquantity;
+        private  TextView CropPrice;
         public myProductholder(@NonNull View itemView) {
             super(itemView);
+
+            CropPrice=itemView.findViewById(R.id.PriceOfCrop);
+            minquantity=itemView.findViewById(R.id.minproductquantity);
             title=itemView.findViewById(R.id.producttitle);
             category=itemView.findViewById(R.id.productcategory);
             quantity=itemView.findViewById(R.id.productquantity);
