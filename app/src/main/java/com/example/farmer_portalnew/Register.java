@@ -56,9 +56,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private void setupspinner(){
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("Register As");
-        arrayList.add("I Am Farmer");
-        arrayList.add("I Am Buyer");
-        arrayList.add("I Am Driver");
+        arrayList.add("farmer");
+        arrayList.add("buyer");
+        arrayList.add("transportAgent");
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item, arrayList){
             @Override
