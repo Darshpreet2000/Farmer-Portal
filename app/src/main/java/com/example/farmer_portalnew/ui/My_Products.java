@@ -77,6 +77,7 @@ public class My_Products extends Fragment {
                 progressBarrecyclemy.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Click on Product to Update", Toast.LENGTH_SHORT).show();
             }
+            
 
             @Override
             public void onCancelled(DatabaseError error) {
