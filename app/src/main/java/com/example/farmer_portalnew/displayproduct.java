@@ -126,10 +126,7 @@ String farmerid,price,name,quantity;
                        }
                    }
                });
-
-
            }
        });
     }
-
 }
