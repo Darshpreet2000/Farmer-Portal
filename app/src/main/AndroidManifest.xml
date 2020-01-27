@@ -6,8 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
     <application
@@ -17,20 +18,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".biddingview.BuyerDetails"
-            android:label="Buyer Details"></activity>
-        <activity android:name=".biddingview.FarmerDetails"
-            android:label="Farmer Details"/>
+        <activity
+            android:name=".biddingview.BuyerDetails"
+            android:label="Buyer Details" />
+        <activity
+            android:name=".biddingview.FarmerDetails"
+            android:label="Farmer Details" />
         <activity
             android:name=".cart.cart"
             android:label="My Cart" />
-        <activity android:name=".ui.displaycategorycrop"
-            android:parentActivityName=".NavigationDrawer"/>
+        <activity
+            android:name=".ui.displaycategorycrop"
+            android:parentActivityName=".NavigationDrawer" />
         <activity android:name=".DisplayTransportDetail" />
         <activity android:name=".TransportFacilty" />
         <activity android:name=".PaymentMethod.creditcard" />
-        <activity android:name=".UpdateYourCrop"
-            android:label="Update Crop"/>
+        <activity
+            android:name=".UpdateYourCrop"
+            android:label="Update Crop" />
         <activity
             android:name="com.paytm.pgsdk.PaytmPGActivity"
             android:configChanges="keyboardHidden|orientation|keyboard"
@@ -56,6 +61,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".PaymentMethod.paypal">
+
         </activity>
 
         <meta-data

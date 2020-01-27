@@ -40,7 +40,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:18.0.0'
     implementation 'com.braintreepayments:card-form:4.2.0'
     implementation 'com.google.android.gms:play-services-wallet:18.0.0'
-
+    compile('com.paypal.sdk:paypal-android-sdk:2.15.3') {
+        exclude group: 'io.card'
+    }
     implementation('com.paytm:pgplussdk:1.2.3') {
         transitive = true;
     }

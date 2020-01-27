@@ -22,6 +22,7 @@ import com.example.farmer_portalnew.Adapter.bidmycrop;
 import com.example.farmer_portalnew.Classes.Cart;
 import com.example.farmer_portalnew.Classes.Originalcart;
 import com.example.farmer_portalnew.PaymentMethod.creditcard;
+import com.example.farmer_portalnew.PaymentMethod.paypal;
 import com.example.farmer_portalnew.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,12 +42,14 @@ public class cart extends AppCompatActivity {
     RecyclerView recyclerViewmycart;
     DatabaseReference myRef,search;
     FirebaseDatabase database;
+    int Totalvalue=0;
     private FirebaseAuth mAuth;
     private List<Originalcart> mycartList = new ArrayList<>();
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_cart);
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -62,7 +65,16 @@ public class cart extends AppCompatActivity {
                 for(DataSnapshot datavalues:dataSnapshot.getChildren()){
                     Originalcart cart=datavalues.getValue(Originalcart.class);
                      String key= datavalues.getKey();
-                    cart.setMykey(key);
+                   String buy=cart.getBuyQuantity();
+                   int i=0;
+                   for(i=0;i<buy.length();i++){
+                       if(buy.charAt(i)==' '){
+                           break;
+                       }
+                   }
+                   buy=buy.substring(0,i);
+                     Totalvalue+=Integer.parseInt(cart.getPrice())*Integer.parseInt(buy);
+                      cart.setMykey(key);
                     mycartList.add(cart);
                 }
                 final Cartadapter Product_adapter = new Cartadapter(mycartList, new Cartadapter.OnItemClicked() {
@@ -108,7 +120,9 @@ public class cart extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
        if(item.getItemId()==R.id.checkout){
-           startActivity(new Intent(cart.this, creditcard.class));
+           Intent i=new Intent(cart.this, paypal.class);
+            i.putExtra("TotalValue",Totalvalue);
+           startActivity(i);
        }
         return super.onOptionsItemSelected(item);
 
