@@ -127,8 +127,8 @@ public class displaycategorycrop extends AppCompatActivity {
                             progressBarrecycle.setVisibility(View.GONE);
                             return;
                         }
-                        current.setBuyQuantity(text.getText().toString()+" Kg");
-                        Originalcart originalcart=new Originalcart(mAuth.getUid(),current.getCropid(),current.getCropName(),current.getCropOwner(),current.getPrice(),"false",current.getCategory(),current.getBuyQuantity(),current.getQuantity());
+                        current.setBuyQuantity(text.getText().toString());
+                        Originalcart originalcart=new Originalcart(mAuth.getUid(),current.getCropid(),current.getCropName(),current.getCropOwner(),current.getPrice(),"false",current.getCategory(),current.getBuyQuantity(),available);
                         cartRef.push().setValue(originalcart).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
